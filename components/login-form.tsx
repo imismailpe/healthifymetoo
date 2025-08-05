@@ -21,14 +21,14 @@ export function LoginForm({
       <Card>
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
-          {/* <CardDescription>
+          <CardDescription>
             Enter your email below to login to your account
-          </CardDescription> */}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <div className="flex flex-col gap-6">
-              {/* <div className="grid gap-3">
+              <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -48,11 +48,11 @@ export function LoginForm({
                   </a>
                 </div>
                 <Input id="password" type="password" required />
-              </div> */}
+              </div>
               <div className="flex flex-col gap-3">
-                {/* <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full">
                   Login
-                </Button> */}
+                </Button>
                 <Button
                   variant="outline"
                   className="w-full"
@@ -62,12 +62,12 @@ export function LoginForm({
                 </Button>
               </div>
             </div>
-            {/* <div className="mt-4 text-center text-sm">
+            <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
               <a href="#" className="underline underline-offset-4">
                 Sign up
               </a>
-            </div> */}
+            </div>
           </form>
         </CardContent>
       </Card>

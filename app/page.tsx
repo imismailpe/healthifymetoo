@@ -1,10 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
 
 export default function Home() {
-  const { data: session } = useSession();
+  // const { data: session, status } = useSession();
+  // console.log(status, session);
+
+  const { data: session, isLoading, error } = useSessionQuery();
+  console.log("isLoading", isLoading, error, session);
   return (
     <div className="p-2 w-full">
       <main className="">
@@ -19,9 +24,18 @@ export default function Home() {
             Get advices for a happy healthy life @ just $99
           </Button>
           {session ? (
-            <Button variant={"secondary"} onClick={() => signOut()}>
-              Logout
-            </Button>
+            <Card>
+              <CardContent>
+                <div>Name: {session.user.name}</div>
+                <div>Email: {session.user.email}</div>
+                <div>Plan: {session.user.plan}</div>
+              </CardContent>
+              <CardFooter>
+                <Button variant={"secondary"} onClick={() => signOut()}>
+                  Logout
+                </Button>
+              </CardFooter>
+            </Card>
           ) : (
             <a href="/login">Login with Google</a>
           )}
