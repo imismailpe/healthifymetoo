@@ -4,6 +4,12 @@ const uri =
   `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_URI}/?retryWrites=true&w=majority&appName=HMTCluster0` as string;
 const options = {};
 
+// Extend Node's global type so we can store the client promise
+declare global {
+  // eslint-disable-next-line no-var
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
+
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
@@ -12,13 +18,14 @@ if (!process.env.MONGODB_URI) {
 }
 
 if (process.env.NODE_ENV === "development") {
-  // Use a global var in dev so we don't keep creating new connections
-  if (!(global as any)._mongoClientPromise) {
+  // In dev mode, use a global variable so we don't create multiple connections
+  if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
-    (global as any)._mongoClientPromise = client.connect();
+    global._mongoClientPromise = client.connect();
   }
-  clientPromise = (global as any)._mongoClientPromise;
+  clientPromise = global._mongoClientPromise;
 } else {
+  // In production, always create a new client
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }

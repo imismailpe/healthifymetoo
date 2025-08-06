@@ -31,9 +31,9 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <p>
-                In today's fast-paced world, many rely on quick fixes and
-                medication to manage lifestyle-related health issues. But true
-                wellness begins with prevention, not pills. Our platform is
+                In today`&rsquo;`s fast-paced world, many rely on quick fixes
+                and medication to manage lifestyle-related health issues. But
+                true wellness begins with prevention, not pills. Our platform is
                 dedicated to promoting a medicine-free lifestyle by helping you
                 understand the power of natural healing, balanced nutrition, and
                 conscious living. We believe your body has the innate ability to
@@ -74,10 +74,10 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <p>
-                Health isn't just about what you eat — it's also about how you
-                live. We guide you in building daily routines that promote
-                sleep, movement, mindfulness, and emotional well-being. From
-                stress management to morning rituals, we help you reclaim
+                Health isn`&rsquo;`t just about what you eat — it`&rsquo;`s also
+                about how you live. We guide you in building daily routines that
+                promote sleep, movement, mindfulness, and emotional well-being.
+                From stress management to morning rituals, we help you reclaim
                 control of your health the natural way.
               </p>
             </CardContent>
@@ -91,9 +91,9 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <p>
-                Living with chronic conditions doesn't have to mean a lifetime
-                of medication. Our approach empowers you to manage and even
-                reverse common health issues such as diabetes, high blood
+                Living with chronic conditions doesn`&rsquo;`t have to mean a
+                lifetime of medication. Our approach empowers you to manage and
+                even reverse common health issues such as diabetes, high blood
                 pressure, PCOS, obesity, arthritis, and digestive disorders —
                 through natural, sustainable changes in lifestyle and diet.
               </p>
@@ -110,9 +110,10 @@ export default function Home() {
               <p>
                 We offer carefully crafted diet plans designed to reduce
                 inflammation, balance hormones, stabilize blood sugar, and
-                support your body's healing mechanisms. These are not crash
-                diets or generic meal plans — they are rooted in natural, whole
-                foods and tailored to suit specific conditions and body types.
+                support your body`&rsquo;`s healing mechanisms. These are not
+                crash diets or generic meal plans — they are rooted in natural,
+                whole foods and tailored to suit specific conditions and body
+                types.
               </p>
             </CardContent>
           </Card>
@@ -140,11 +141,12 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <p>
-                Whether you've just been diagnosed or have been struggling for
-                years, our resources can guide you toward a medicine-free path
-                to better health. It's not about rejecting medical care — it's
-                about reducing dependence on drugs by making your lifestyle the
-                foundation of your healing.
+                Whether you`&rsquo;`ve just been diagnosed or have been
+                struggling for years, our resources can guide you toward a
+                medicine-free path to better health. It`&rsquo;`s not about
+                rejecting medical care — it`&rsquo;`s about reducing dependence
+                on drugs by making your lifestyle the foundation of your
+                healing.
               </p>
             </CardContent>
           </Card>
@@ -156,11 +158,11 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <p>
-                If you're ready to move beyond dependency on medicine and
-                embrace holistic wellness, you're in the right place. Our
-                resources, community, and support will walk with you every step
-                of the way - toward a life that's vibrant, balanced, and
-                medicine-free.
+                If you`&rsquo;`re ready to move beyond dependency on medicine
+                and embrace holistic wellness, you`&rsquo;`re in the right
+                place. Our resources, community, and support will walk with you
+                every step of the way - toward a life that`&rsquo;`s vibrant,
+                balanced, and medicine-free.
               </p>
             </CardContent>
             <CardFooter>
