@@ -178,7 +178,7 @@ export default function Home() {
           <div className="opacity-0 animate-[fadeIn_0.4s_ease-in_forwards] bg-blue-400 p-4 rounded">
             Box 1
           </div>
-          {session ? (
+          {session?.user ? (
             <Card className="opacity-0 animate-[fadeIn_0.4s_ease-in_forwards]">
               <CardContent>
                 <div>Name: {session.user.name}</div>
