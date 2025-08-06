@@ -56,7 +56,12 @@ export function LoginForm({
                 <Button
                   variant="outline"
                   className="w-full"
-                  onClick={() => signIn("google")}
+                  onClick={() =>
+                    signIn("google", {
+                      redirect: true,
+                      callbackUrl: "/",
+                    })
+                  }
                 >
                   Login with Google
                 </Button>
@@ -64,9 +69,18 @@ export function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
+              <Button
+                variant="link"
+                className="w-full"
+                onClick={() =>
+                  signIn("google", {
+                    redirect: true,
+                    callbackUrl: "/",
+                  })
+                }
+              >
                 Sign up
-              </a>
+              </Button>
             </div>
           </form>
         </CardContent>
