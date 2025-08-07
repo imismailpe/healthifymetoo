@@ -37,7 +37,7 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full rounded p-8 flex gap-8 flex-col opacity-0 animate-[fadeIn_0.5s_ease-in_forwards]">
-            <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 items-center justify-center">
+            <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[auto_auto] gap-4 items-center justify-center">
               <Image
                 src="/images/bg1.jpg"
                 alt="life icons"
