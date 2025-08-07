@@ -32,7 +32,7 @@ export default function Home() {
                 Welcome to a Life Beyond Medication
               </h2>
               <div className="flex flex-col gap-4">
-                <p className="text-xl">
+                <p className="text-md md:text-xl">
                   In today&rsquo;s fast-paced world, many rely on quick fixes
                   and medication to manage lifestyle-related health issues. But
                   true wellness begins with prevention, not pills. Our platform
@@ -52,13 +52,13 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full rounded p-8 flex gap-8 flex-col opacity-0 animate-[fadeIn_0.5s_ease-in_forwards]">
-            <section className="flex gap-4">
+            <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 items-center justify-center">
               <Image
-                src="/images/bg1.jfif"
+                src="/images/bg1.jpg"
                 alt="life icons"
                 width={230}
                 height={230}
-                className="rounded-full object-cover"
+                className="rounded-full object-cover w-full"
               />
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
@@ -90,7 +90,7 @@ export default function Home() {
           </div>
 
           <section className="bg-[url('/images/bg3.jfif')] bg-cover bg-no-repeat bg-center w-full rounded grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 p-8">
-            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black">
+            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black shadow-md">
               <h2 className="text-xl font-bold">
                 Take Control of Chronic Conditions — Naturally
               </h2>
@@ -102,7 +102,7 @@ export default function Home() {
                 through natural, sustainable changes in lifestyle and diet.
               </p>
             </div>
-            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black">
+            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black shadow-md">
               <h2 className="text-xl font-bold">
                 Food as Healing, Not Just Fuel
               </h2>
@@ -115,7 +115,7 @@ export default function Home() {
                 types.
               </p>
             </div>
-            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black">
+            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black shadow-md">
               <h2 className="text-xl font-bold">A Lifestyle Beyond Pills</h2>
               <p>
                 Modern medicine often treats symptoms, not causes. Our
@@ -125,7 +125,7 @@ export default function Home() {
                 on your long-term health.
               </p>
             </div>
-            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black">
+            <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black shadow-md">
               <h2 className="text-xl font-bold">Start Your Healing Journey</h2>
               <p>
                 Whether you&rsquo;ve just been diagnosed or have been struggling
@@ -137,7 +137,7 @@ export default function Home() {
             </div>
           </section>
 
-          <Card className="opacity-0 animate-[fadeIn_0.4s_ease-in_forwards]">
+          <Card className="m-2">
             <CardHeader>
               <CardTitle>
                 <h2 className="text-xl font-bold">
