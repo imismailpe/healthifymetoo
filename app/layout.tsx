@@ -15,10 +15,10 @@ import Header from "@/components/Header";
 // });
 
 export const metadata: Metadata = {
-  title: "HealthifyMeToo",
+  title: "HealthyBeing",
   description: "Your path to natural wellness",
   openGraph: {
-    title: "HealthifyMeToo",
+    title: "HealthyBeing",
     description: "Your path to natural wellness",
     url: "https://healthifymetoo.netlify.app/",
     type: "website",

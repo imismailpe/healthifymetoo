@@ -58,7 +58,7 @@ export default function Home() {
                 alt="life icons"
                 width={230}
                 height={230}
-                className="rounded-full object-cover w-full"
+                className="rounded-full object-cover w-full max-w-[400px]"
               />
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
