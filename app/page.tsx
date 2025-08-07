@@ -1,24 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { useSessionQuery } from "@/hooks/useSessionQuery";
-import { signOut } from "next-auth/react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-// import { useEffect } from "react";
 
 export default function Home() {
-  // const { data: session, status } = useSession();
-  // console.log(status, session);
-
-  const { data: session, isLoading, error } = useSessionQuery();
-  // console.log("isLoading", isLoading, error, session);
-
   return (
     <div className="p-0 lg:p-4 w-full">
       <main className="text-lg">
@@ -170,20 +155,6 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
-          {session?.user ? (
-            <Card className="shadow-sm">
-              <CardContent>
-                <div>Name: {session.user.name}</div>
-                <div>Email: {session.user.email}</div>
-                <div>Plan: {session.user.plan}</div>
-              </CardContent>
-              <CardFooter>
-                <Button variant={"secondary"} onClick={() => signOut()}>
-                  Logout
-                </Button>
-              </CardFooter>
-            </Card>
-          ) : null}
         </div>
       </main>
       <footer className=""></footer>
