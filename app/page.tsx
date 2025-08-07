@@ -20,13 +20,13 @@ export default function Home() {
   // console.log("isLoading", isLoading, error, session);
 
   return (
-    <div className="p-4 w-full">
+    <div className="p-0 md:p-4 w-full">
       <main className="text-lg">
         <div className="flex gap-4 flex-col">
-          <h1 className="text-xl font-bold">
+          <h1 className="text-xl font-bold m-2">
             Welcome to your path to natural wellness
           </h1>
-          <div className="bg-[url('/images/bg2.jfif')] bg-cover bg-no-repeat bg-center w-full p-8 flex wrap rounded border-sm shadow-sm">
+          <div className="bg-[url('/images/bg2.jfif')] bg-cover bg-no-repeat bg-center w-full p-2 md:p-8 flex wrap rounded border-sm shadow-sm">
             <div className="text-black backdrop-blur-sm p-8 rounded bg-black/60 text-white">
               <h2 className="font-bold text-xl">
                 Welcome to a Life Beyond Medication
@@ -89,7 +89,7 @@ export default function Home() {
             </section>
           </div>
 
-          <section className="bg-[url('/images/bg3.jfif')] bg-cover bg-no-repeat bg-center w-full rounded flex flex-wrap md:flex-nowrap gap-8 p-8">
+          <section className="bg-[url('/images/bg3.jfif')] bg-cover bg-no-repeat bg-center w-full rounded grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 p-8">
             <div className="flex flex-col gap-4 backdrop-blur-xl p-8 bg-white/50 rounded text-black">
               <h2 className="text-xl font-bold">
                 Take Control of Chronic Conditions — Naturally
@@ -145,11 +145,11 @@ export default function Home() {
                 </h2>
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative flex gap-4">
+            <CardContent className="relative grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
               <img
                 src={"/images/bg2.jfif"}
                 alt="life beyond medication"
-                className="rounded w-full max-w-[320px]"
+                className="rounded w-full"
               />
               <div className="flex gap-4 flex-col">
                 <p>
