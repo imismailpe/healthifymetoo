@@ -26,7 +26,15 @@ export default function ProfileMenu() {
             <div>{session.user.name}</div>
             <div>{session.user.email}</div>
             <div>Plan: {session.user.plan}</div>
-            <Button variant={"secondary"} onClick={() => signOut()}>
+            <Button
+              variant={"secondary"}
+              onClick={() =>
+                signOut({
+                  redirect: true,
+                  callbackUrl: "/",
+                })
+              }
+            >
               Logout
             </Button>
           </div>
