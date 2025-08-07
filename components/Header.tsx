@@ -1,12 +1,4 @@
 import React from "react";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./ModeToggle";
 
 export default function Header() {
