@@ -17,6 +17,20 @@ import Header from "@/components/Header";
 export const metadata: Metadata = {
   title: "HealthifyMeToo",
   description: "Your path to natural wellness",
+  openGraph: {
+    title: "HealthifyMeToo",
+    description: "Your path to natural wellness",
+    url: "https://healthifymetoo.netlify.app/",
+    type: "website",
+    images: [
+      {
+        url: "https://healthifymetoo.netlify.app/images/bg1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Your path to natural wellness",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
