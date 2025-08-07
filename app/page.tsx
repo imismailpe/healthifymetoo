@@ -1,9 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSessionQuery } from "@/hooks/useSessionQuery";
 import Image from "next/image";
 
 export default function Home() {
+  const { data: session } = useSessionQuery();
   return (
     <div className="p-0 lg:p-4 w-full">
       <main className="text-lg">
@@ -25,7 +27,7 @@ export default function Home() {
                   innate ability to heal and thrive when supported with the
                   right habits.
                 </p>
-                <a href="/login">
+                <a href={session?.user ? "/dashboard" : "/login"}>
                   <Button
                     className="font-bold hover:text-white cursor-pointer w-fit"
                     size={"lg"}
@@ -144,7 +146,7 @@ export default function Home() {
                   you every step of the way - toward a life that&rsquo;s
                   vibrant, balanced, and medicine-free.
                 </p>
-                <a href="/login">
+                <a href={session?.user ? "/dashboard" : "/login"}>
                   <Button
                     className="font-bold hover:text-white cursor-pointer w-fit"
                     size={"lg"}
