@@ -59,7 +59,7 @@ export function LoginForm({
                   onClick={() =>
                     signIn("google", {
                       redirect: true,
-                      callbackUrl: "/",
+                      callbackUrl: "/dashboard",
                     })
                   }
                 >

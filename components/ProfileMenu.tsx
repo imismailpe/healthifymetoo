@@ -22,6 +22,7 @@ export default function ProfileMenu() {
       <DropdownMenuContent align="end">
         {session?.user ? (
           <div className="p-4 rounded flex flex-col gap-4">
+            <a href="/dashboard">Dashboard</a>
             <div>{session.user.name}</div>
             <div>{session.user.email}</div>
             <div>Plan: {session.user.plan}</div>
