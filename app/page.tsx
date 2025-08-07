@@ -23,13 +23,11 @@ export default function Home() {
     <div className="p-0 lg:p-4 w-full">
       <main className="text-lg">
         <div className="flex gap-4 flex-col">
-          <h2 className="text-xl font-bold m-2">
-            Welcome to your path to natural wellness
-          </h2>
           <div className="bg-[url('/images/bg2.jfif')] bg-cover bg-no-repeat bg-center w-full p-2 md:p-8 flex wrap rounded border-sm shadow-sm">
             <div className="text-black backdrop-blur-sm p-8 rounded bg-black/60 text-white">
               <h2 className="font-bold text-xl">
-                Welcome to a Life Beyond Medication
+                Welcome to your path to natural wellness and a life Beyond
+                Medication
               </h2>
               <div className="flex flex-col gap-4">
                 <p className="text-md md:text-xl">
@@ -42,12 +40,14 @@ export default function Home() {
                   innate ability to heal and thrive when supported with the
                   right habits.
                 </p>
-                <Button
-                  className="font-bold hover:text-white cursor-pointer w-fit"
-                  size={"lg"}
-                >
-                  Get Started
-                </Button>
+                <a href="/login">
+                  <Button
+                    className="font-bold hover:text-white cursor-pointer w-fit"
+                    size={"lg"}
+                  >
+                    Get Started
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -159,12 +159,14 @@ export default function Home() {
                   you every step of the way - toward a life that&rsquo;s
                   vibrant, balanced, and medicine-free.
                 </p>
-                <Button
-                  className="font-bold hover:text-white cursor-pointer w-fit"
-                  size={"lg"}
-                >
-                  Get Started
-                </Button>
+                <a href="/login">
+                  <Button
+                    className="font-bold hover:text-white cursor-pointer w-fit"
+                    size={"lg"}
+                  >
+                    Get Started
+                  </Button>
+                </a>
               </div>
             </CardContent>
           </Card>
@@ -181,9 +183,7 @@ export default function Home() {
                 </Button>
               </CardFooter>
             </Card>
-          ) : (
-            <a href="/login">Get Started</a>
-          )}
+          ) : null}
         </div>
       </main>
       <footer className=""></footer>
