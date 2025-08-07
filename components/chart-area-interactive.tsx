@@ -30,27 +30,28 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 export const description = "An interactive area chart";
 
 const chartData = [
-  { date: "2024-04-01", workout: 222, sleep: 8 },
-  { date: "2024-04-02", workout: 97, sleep: 180 },
-  { date: "2024-04-03", workout: 167, sleep: 120 },
-  { date: "2024-04-04", workout: 242, sleep: 260 },
-  { date: "2024-04-05", workout: 373, sleep: 290 },
-  { date: "2024-04-06", workout: 301, sleep: 340 },
-  { date: "2024-04-07", workout: 245, sleep: 180 },
-  { date: "2024-04-08", workout: 409, sleep: 320 },
+  { date: "2024-04-01", workout: 1, sleep: 8, water: 4 },
+  { date: "2024-04-02", workout: 1.5, sleep: 8, water: 2 },
+  { date: "2024-04-03", workout: 0, sleep: 5, water: 5 },
+  { date: "2024-04-04", workout: 2, sleep: 6, water: 3 },
+  { date: "2024-04-05", workout: 3, sleep: 9, water: 4 },
+  { date: "2024-04-06", workout: 0, sleep: 4, water: 5 },
+  { date: "2024-04-07", workout: 0, sleep: 8, water: 6 },
+  { date: "2024-04-08", workout: 1, sleep: 7, water: 7 },
 ];
 
 const chartConfig = {
-  actions: {
-    label: "Actions",
-  },
   workout: {
     label: "Workout",
-    color: "var(--primary)",
+    color: "var(--chart-1)",
   },
   sleep: {
     label: "Sleep",
-    color: "var(--primary)",
+    color: "var(--chart-2)",
+  },
+  water: {
+    label: "Water",
+    color: "var(--chart-3)",
   },
 } satisfies ChartConfig;
 
@@ -132,7 +133,7 @@ export function ChartAreaInteractive() {
         >
           <AreaChart data={chartData}>
             <defs>
-              <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillWorkout" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor="var(--color-workout)"
@@ -144,7 +145,7 @@ export function ChartAreaInteractive() {
                   stopOpacity={0.1}
                 />
               </linearGradient>
-              <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillSleep" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor="var(--color-sleep)"
@@ -153,6 +154,18 @@ export function ChartAreaInteractive() {
                 <stop
                   offset="95%"
                   stopColor="var(--color-sleep)"
+                  stopOpacity={0.1}
+                />
+              </linearGradient>
+              <linearGradient id="fillWater" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor="var(--color-water)"
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="var(--color-water)"
                   stopOpacity={0.1}
                 />
               </linearGradient>
@@ -189,15 +202,22 @@ export function ChartAreaInteractive() {
             <Area
               dataKey="sleep"
               type="natural"
-              fill="url(#fillMobile)"
+              fill="url(#fillSleep)"
               stroke="var(--color-sleep)"
               stackId="a"
             />
             <Area
               dataKey="workout"
               type="natural"
-              fill="url(#fillDesktop)"
+              fill="url(#fillWorkout)"
               stroke="var(--color-workout)"
+              stackId="a"
+            />
+            <Area
+              dataKey="water"
+              type="natural"
+              fill="url(#fillWater)"
+              stroke="var(--color-water)"
               stackId="a"
             />
           </AreaChart>
