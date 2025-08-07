@@ -20,7 +20,7 @@ export default function Home() {
   // console.log("isLoading", isLoading, error, session);
 
   return (
-    <div className="p-0 md:p-4 w-full">
+    <div className="p-0 lg:p-4 w-full">
       <main className="text-lg">
         <div className="flex gap-4 flex-col">
           <h1 className="text-xl font-bold m-2">
