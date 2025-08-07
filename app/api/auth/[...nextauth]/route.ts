@@ -5,7 +5,7 @@ import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
 const handler = NextAuth({
-  adapter: MongoDBAdapter(clientPromise, { databaseName: "HMT" }),
+  adapter: MongoDBAdapter(clientPromise, { databaseName: "HB" }),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,

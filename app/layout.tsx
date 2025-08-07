@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "HealthyBeing",
     description: "Your path to natural wellness",
-    url: "https://healthifymetoo.netlify.app/",
+    url: "https://healthybeingonline.netlify.app/",
     type: "website",
     images: [
       {
-        url: "https://healthifymetoo.netlify.app/images/bg1.jpg",
+        url: "https://healthybeingonline.netlify.app/images/bg1.jpg",
         width: 1200,
         height: 630,
         alt: "Your path to natural wellness",

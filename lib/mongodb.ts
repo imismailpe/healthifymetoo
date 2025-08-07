@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 
 const uri =
-  `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_URI}/?retryWrites=true&w=majority&appName=HMTCluster0` as string;
+  `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_URI}/?retryWrites=true&w=majority&appName=ClusterHB` as string;
 const options = {};
 
 // Extend Node's global type so we can store the client promise
