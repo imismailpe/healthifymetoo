@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
 
 export default function ProfileMenu() {
-  const { data: session, isLoading, error } = useSessionQuery();
+  const { data: session } = useSessionQuery();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
