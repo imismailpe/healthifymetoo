@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session } = useSessionQuery();
@@ -27,14 +28,14 @@ export default function Home() {
                   innate ability to heal and thrive when supported with the
                   right habits.
                 </p>
-                <a href={session?.user ? "/dashboard" : "/login"}>
+                <Link href={session?.user ? "/dashboard" : "/login"}>
                   <Button
                     className="font-bold hover:text-white cursor-pointer w-fit"
                     size={"lg"}
                   >
                     Get Started
                   </Button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
