@@ -120,7 +120,7 @@ export default function ProfileEdit() {
     });
     setIsPending(false);
   }
-  return userQuery.isFetching ? (
+  return !userQuery.isFetching ? (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
