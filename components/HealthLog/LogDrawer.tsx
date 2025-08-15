@@ -13,6 +13,9 @@ export function LogDrawer({
   onOpenChange: (open: boolean) => void;
 }) {
   const [step, setStep] = useState(0);
+  const defaultValues = [];
+  const [values, setValues] = useState([]);
+
   const onNextStep = () => {
     setStep(step + 1 > 1 ? 1 : step + 1);
   };
