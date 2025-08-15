@@ -51,6 +51,7 @@ export async function upsertDocument(
     const client = await clientPromise;
     const db = client.db("HB");
     const docId = new ObjectId(id);
+    //use a different field for query. as id wont be there for first insert
     const query = { _id: docId };
     const options = { upsert: true };
     const update = { $set: { ...data } };

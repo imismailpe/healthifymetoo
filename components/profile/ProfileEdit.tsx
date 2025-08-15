@@ -25,6 +25,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const formSchema = z.object({
   name: z.string().min(5, {
@@ -119,7 +120,7 @@ export default function ProfileEdit() {
     });
     setIsPending(false);
   }
-  return (
+  return userQuery.isFetching ? (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
@@ -171,7 +172,7 @@ export default function ProfileEdit() {
                   type={"date"}
                   placeholder="08/15/1947"
                   {...field}
-                  className="w-fit"
+                  className="w-[180px]"
                 />
               </FormControl>
               <FormMessage />
@@ -210,5 +211,13 @@ export default function ProfileEdit() {
         </Button>
       </form>
     </Form>
+  ) : (
+    <div className="flex gap-4 flex-col">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-12 w-[180px]" />
+      <Skeleton className="h-12 w-[180px]" />
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-12 w-full" />
+    </div>
   );
 }
