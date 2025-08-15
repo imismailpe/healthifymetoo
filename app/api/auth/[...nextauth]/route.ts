@@ -12,6 +12,7 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       profile(profile) {
         return {
+          ...profile,
           id: profile.sub,
           name: profile.name,
           email: profile.email,
