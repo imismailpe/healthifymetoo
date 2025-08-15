@@ -19,7 +19,7 @@ export async function getDocumentById(collection: string, id: string) {
 export async function updateDocument(
   collection: string,
   id: string,
-  data: Record<string, any>
+  data: Record<string, unknown>
 ) {
   try {
     const client = await clientPromise;
@@ -45,7 +45,7 @@ export async function updateDocument(
 export async function upsertDocument(
   collection: string,
   id: string,
-  data: Record<string, any>
+  data: Record<string, unknown>
 ) {
   try {
     const client = await clientPromise;

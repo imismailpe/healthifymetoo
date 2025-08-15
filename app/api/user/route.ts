@@ -1,4 +1,3 @@
-import { success } from "zod";
 import { getDocumentById, updateDocument } from "../functions";
 
 export async function POST(req: Request) {

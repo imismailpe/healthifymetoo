@@ -101,10 +101,10 @@ export default function ProfileEdit() {
     setUserData(values);
   };
   useEffect(() => {
-    if (userQuery?.data?.data?.length) {
+    if (!userQuery.isFetching && userQuery?.data?.data?.length) {
       fillUser();
     }
-  }, [userQuery?.data?.data?.length]);
+  }, [userQuery.isFetching]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
