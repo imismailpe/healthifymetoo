@@ -46,7 +46,7 @@ export default function KeyProgress() {
           <CardTitle>Your Compliance with optimal measures</CardTitle>
           <CardDescription>Try to improve your points</CardDescription>
         </CardHeader>
-        <CardContent className="flex h-fit">
+        <CardContent className="flex h-fit min-h-[250px]">
           <ChartContainer
             config={chartConfig}
             className="mx-auto aspect-square max-h-[250px]"
