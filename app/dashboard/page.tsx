@@ -1,13 +1,19 @@
+"use client";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { LogDrawer } from "@/components/HealthLog/LogDrawer";
 // import { DataTable } from "@/components/data-table";
 import { SectionCards } from "@/components/section-cards";
 import { SiteHeader } from "@/components/site-header";
+import { Button } from "@/components/ui/button";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useState } from "react";
+import { HeartPlus } from "lucide-react";
 
 // import data from "./data.json";
 
 export default function Page() {
+  const [logOpen, setLogOpen] = useState(false);
   return (
     <SidebarProvider
       style={
@@ -18,7 +24,7 @@ export default function Page() {
       }
     >
       <AppSidebar variant="inset" />
-      <SidebarInset>
+      <SidebarInset className="relative">
         <SiteHeader title="Dashboard" />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
@@ -31,6 +37,12 @@ export default function Page() {
             </div>
           </div>
         </div>
+        <div className="sticky right-[46px] bottom-[16px] flex items-end w-full">
+          <Button variant="outline" onClick={() => setLogOpen(!logOpen)}>
+            <HeartPlus />
+          </Button>
+        </div>
+        <LogDrawer open={logOpen} onOpenChange={setLogOpen} />
       </SidebarInset>
     </SidebarProvider>
   );
