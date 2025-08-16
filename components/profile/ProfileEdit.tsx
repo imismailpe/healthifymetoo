@@ -24,7 +24,7 @@ import {
 } from "../ui/select";
 import { useEffect, useState } from "react";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUserQuery } from "@/hooks/useUserQuery";
 import { usePathname, useRouter } from "next/navigation";
@@ -82,6 +82,7 @@ export default function ProfileEdit() {
   const userId = session?.user?.id || "";
 
   const userQuery = useUserQuery(userId);
+  const queryClient = useQueryClient();
   const fillUser = () => {
     const data = userQuery.data.data[0];
     const values = {
@@ -107,16 +108,25 @@ export default function ProfileEdit() {
     defaultValues: userData,
   });
 
+  const mutation = useMutation({
+    mutationKey: ["user"],
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      setIsPending(true);
+      await fetch("/api/user", {
+        method: "POST",
+        body: JSON.stringify({ ...values, id: userId }),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      if (pathname === "/profile") {
+        router.push("/health");
+      }
+      setIsPending(false);
+    },
+  });
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsPending(true);
-    await fetch("/api/user", {
-      method: "POST",
-      body: JSON.stringify({ ...values, id: userId }),
-    });
-    if (pathname === "/profile") {
-      router.push("/health");
-    }
-    setIsPending(false);
+    mutation.mutate(values);
   }
   return !userQuery.isFetching ? (
     <Form {...form}>
