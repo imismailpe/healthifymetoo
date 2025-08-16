@@ -73,6 +73,7 @@ export default function KeyProgress() {
                 desc="Wakeup at least 1.5hrs before sunrise"
                 chartData={chartData}
                 optimalValue={optimal_wakeup}
+                unit="Hrs"
               />
             ) : (
               <div className="flex gap-4 flex-col">
@@ -88,6 +89,7 @@ export default function KeyProgress() {
                 desc="Workout for at least 15mins a day"
                 chartData={chartData}
                 optimalValue={optimal_workout}
+                unit="Mins"
               />
             ) : (
               <div className="flex gap-4 flex-col">
@@ -103,6 +105,7 @@ export default function KeyProgress() {
                 desc="Eat your last meal at least 3hrs before bed"
                 chartData={chartData}
                 optimalValue={optimal_dinner}
+                unit="Hrs"
               />
             ) : (
               <div className="flex gap-4 flex-col">
@@ -118,6 +121,7 @@ export default function KeyProgress() {
                 desc="Sleep at least 7hrs"
                 chartData={chartData}
                 optimalValue={optimal_sleep}
+                unit="Hrs"
               />
             ) : (
               <div className="flex gap-4 flex-col">

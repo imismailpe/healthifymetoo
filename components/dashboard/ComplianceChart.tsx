@@ -14,12 +14,14 @@ export default function ComplianceChart({
   chartData,
   optimalValue,
   desc,
+  unit,
 }: {
   dataKey: string;
   label: string;
   chartData: Record<string, number>;
   optimalValue: number;
   desc: string;
+  unit: string;
 }) {
   const chartConfig = {} satisfies ChartConfig;
   const userValue = chartData[dataKey];
@@ -27,7 +29,13 @@ export default function ComplianceChart({
 
   return (
     <div className="flex flex-col shadow-sm p-4 rounded-sm">
-      <div className="font-semibold">{label}</div>
+      <div className="font-semibold flex justify-between">
+        <span>{label}</span>
+        <span>
+          {userValue}
+          {unit}
+        </span>
+      </div>
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px] min-h-[200px]"
