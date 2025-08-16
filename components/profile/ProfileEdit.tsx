@@ -26,6 +26,7 @@ import { useEffect, useState } from "react";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useUserQuery } from "@/hooks/useUserQuery";
 
 const formSchema = z.object({
   name: z.string().min(5, {
@@ -75,18 +76,9 @@ export default function ProfileEdit() {
     mobile_number: "",
   };
   const [userData, setUserData] = useState(defaultValues);
-  const userId = session?.user?.id;
+  const userId = session?.user?.id || "";
 
-  const userQuery = useQuery({
-    queryKey: ["user", userId], // ✅ cache by userId
-    enabled: !!userId, // run only when id is available
-    queryFn: async () => {
-      const result = await fetch(`/api/user?id=${userId}`);
-      const json = await result.json();
-      return json;
-    },
-    refetchOnWindowFocus: false,
-  });
+  const userQuery = useUserQuery(userId);
   const fillUser = () => {
     const data = userQuery.data.data[0];
     const values = {
@@ -102,10 +94,10 @@ export default function ProfileEdit() {
     setUserData(values);
   };
   useEffect(() => {
-    if (!userQuery.isFetching && userQuery?.data?.data?.length) {
+    if (userId && !userQuery.isFetching && userQuery?.data?.data?.length) {
       fillUser();
     }
-  }, [userQuery.isFetching]);
+  }, [userId, userQuery.isFetching]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

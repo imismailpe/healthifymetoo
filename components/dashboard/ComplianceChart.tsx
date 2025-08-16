@@ -17,13 +17,14 @@ export default function ComplianceChart({
 }: {
   dataKey: string;
   label: string;
-  chartData: Record<string, number>[];
+  chartData: Record<string, number>;
   optimalValue: number;
   desc: string;
 }) {
   const chartConfig = {} satisfies ChartConfig;
-  const userValue = chartData[0][dataKey];
+  const userValue = chartData[dataKey];
   const userPerc = (userValue / optimalValue) * 100;
+
   return (
     <div className="flex flex-col shadow-sm p-4 rounded-sm">
       <ChartContainer
@@ -94,8 +95,10 @@ export default function ComplianceChart({
             ? `${label} is poor`
             : userPerc < 80
             ? `${label} needs improvement`
-            : userPerc <= 100
+            : userPerc < 95
             ? `${label} is fine but not optimal`
+            : userPerc >= 95 && userPerc <= 100
+            ? `Looks good`
             : `${label} needs improvement`}
         </div>
         <div className="text-sm font-thin">{desc}</div>

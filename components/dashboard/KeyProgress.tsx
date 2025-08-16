@@ -1,33 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "../ui/card";
 import ComplianceChart from "./ComplianceChart";
+import { ClockPlus } from "lucide-react";
+import { Button } from "../ui/button";
+import UpdateCompliance from "./UpdateCompliance";
+import { useUserQuery } from "@/hooks/useUserQuery";
+import { useSessionQuery } from "@/hooks/useSessionQuery";
 
 export default function KeyProgress() {
-  const optimal_sleep = 8;
+  const [updateComplianceOpen, setUpdateComplianceOpen] = useState(false);
+  const optimal_sleep = 7;
   const optimal_dinner = 3;
   const optimal_workout = 15;
   const optimal_wakeup = 1.5;
-  const chartData = [
-    {
-      sleep: 2,
-      last_meal_gap: 2,
-      wakeup_gap: 2,
-      workout: 12,
-    },
-  ];
 
+  const defaultValues = {
+    wakeup_gap: 1.5,
+    workout: 15,
+    last_meal_gap: 3,
+    sleep: 7,
+  };
+
+  const [data, setData] = useState(defaultValues);
+  const { data: session } = useSessionQuery();
+  const userId = session?.user?.id || "";
+  const userQuery = useUserQuery(userId);
+  useEffect(() => {
+    if (userQuery.isFetched) {
+      const data = userQuery.data.data[0];
+
+      const values = {
+        wakeup_gap: data.wakeup_gap,
+        workout: data.workout,
+        last_meal_gap: data.last_meal_gap,
+        sleep: data.sleep,
+      };
+      setData(values);
+    }
+  }, [userQuery.isFetched, userQuery.isFetching]);
+  const chartData = data;
   return (
     <div className="flex flex-col gap-4 px-4 lg:px-6">
       <Card>
         <CardHeader>
           <CardTitle>Your Compliance with optimal measures</CardTitle>
           <CardDescription>Try to improve your points</CardDescription>
+          <CardAction>
+            <Button
+              variant={"outline"}
+              onClick={() => setUpdateComplianceOpen(true)}
+            >
+              <ClockPlus />
+            </Button>
+          </CardAction>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -62,6 +94,10 @@ export default function KeyProgress() {
           </div>
         </CardContent>
       </Card>
+      <UpdateCompliance
+        open={updateComplianceOpen}
+        onOpenChange={setUpdateComplianceOpen}
+      />
     </div>
   );
 }
