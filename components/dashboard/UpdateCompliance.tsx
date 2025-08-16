@@ -75,138 +75,148 @@ export default function UpdateCompliance({
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent className="p-4">
-        <DrawerHeader>
-          <DrawerTitle></DrawerTitle>
-        </DrawerHeader>
+        <div className="mx-auto w-full max-w-xl">
+          <DrawerHeader>
+            <DrawerTitle></DrawerTitle>
+          </DrawerHeader>
 
-        {userQuery.isFetched ? (
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="wakeup_gap"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Wake up</FormLabel>
-                    <div className="flex items-center gap-x-2 flex-wrap">
-                      <span className="whitespace-nowrap">
-                        I woke up at least
-                      </span>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          {...field}
-                          className="w-[80px]"
-                          value={field.value ?? ""}
-                          onChange={(e) =>
-                            field.onChange(e.target.valueAsNumber)
-                          }
-                        />
-                      </FormControl>
-                      <span className="whitespace-nowrap">
-                        hrs before sunrise
-                      </span>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="workout"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Workout</FormLabel>
-                    <div className="flex items-center gap-x-2 flex-wrap">
-                      <span className="whitespace-nowrap">
-                        I have worked out at least
-                      </span>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          {...field}
-                          className="w-[80px]"
-                          value={field.value ?? ""}
-                          onChange={(e) =>
-                            field.onChange(e.target.valueAsNumber)
-                          }
-                        />
-                      </FormControl>
-                      <span className="whitespace-nowrap">
-                        mins for the day
-                      </span>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="last_meal_gap"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Last meal</FormLabel>
-                    <div className="flex items-center gap-x-2 flex-wrap">
-                      <span className="whitespace-nowrap">
-                        I eat my last meal at least
-                      </span>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          {...field}
-                          className="w-[80px]"
-                          value={field.value ?? ""}
-                          onChange={(e) =>
-                            field.onChange(e.target.valueAsNumber)
-                          }
-                        />
-                      </FormControl>
-                      <span className="whitespace-nowrap">
-                        hrs before going to bed
-                      </span>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="sleep"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Sleep</FormLabel>
-                    <div className="flex items-center gap-x-2 flex-wrap">
-                      <span className="whitespace-nowrap">
-                        I have slept at least
-                      </span>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          {...field}
-                          className="w-[80px]"
-                          value={field.value ?? ""}
-                          onChange={(e) =>
-                            field.onChange(e.target.valueAsNumber)
-                          }
-                        />
-                      </FormControl>
-                      <span className="whitespace-nowrap">hrs last night</span>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" disabled={isPending}>
-                Save
-              </Button>
-            </form>
-          </Form>
-        ) : (
-          <div className="flex gap-4 flex-col">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-[180px]" />
-          </div>
-        )}
+          {userQuery.isFetched ? (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="wakeup_gap"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Wake up</FormLabel>
+                      <div className="flex items-center gap-x-2 flex-wrap">
+                        <span className="whitespace-nowrap">
+                          I woke up at least
+                        </span>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            className="w-[80px]"
+                            value={field.value ?? ""}
+                            onChange={(e) =>
+                              field.onChange(e.target.valueAsNumber)
+                            }
+                            step={0.5}
+                          />
+                        </FormControl>
+                        <span className="whitespace-nowrap">
+                          hrs before sunrise
+                        </span>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="workout"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Workout</FormLabel>
+                      <div className="flex items-center gap-x-2 flex-wrap">
+                        <span className="whitespace-nowrap">
+                          I have worked out at least
+                        </span>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            className="w-[80px]"
+                            value={field.value ?? ""}
+                            onChange={(e) =>
+                              field.onChange(e.target.valueAsNumber)
+                            }
+                          />
+                        </FormControl>
+                        <span className="whitespace-nowrap">
+                          mins for the day
+                        </span>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="last_meal_gap"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last meal</FormLabel>
+                      <div className="flex items-center gap-x-2 flex-wrap">
+                        <span className="whitespace-nowrap">
+                          I eat my last meal at least
+                        </span>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            className="w-[80px]"
+                            value={field.value ?? ""}
+                            onChange={(e) =>
+                              field.onChange(e.target.valueAsNumber)
+                            }
+                            step={0.5}
+                          />
+                        </FormControl>
+                        <span className="whitespace-nowrap">
+                          hrs before going to bed
+                        </span>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="sleep"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Sleep</FormLabel>
+                      <div className="flex items-center gap-x-2 flex-wrap">
+                        <span className="whitespace-nowrap">
+                          I have slept at least
+                        </span>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            className="w-[80px]"
+                            value={field.value ?? ""}
+                            onChange={(e) =>
+                              field.onChange(e.target.valueAsNumber)
+                            }
+                            step={0.5}
+                          />
+                        </FormControl>
+                        <span className="whitespace-nowrap">
+                          hrs last night
+                        </span>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" disabled={isPending}>
+                  Save
+                </Button>
+              </form>
+            </Form>
+          ) : (
+            <div className="flex gap-4 flex-col">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-[180px]" />
+            </div>
+          )}
+        </div>
       </DrawerContent>
     </Drawer>
   );
