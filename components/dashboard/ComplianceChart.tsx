@@ -25,7 +25,11 @@ export default function ComplianceChart({
 }) {
   const chartConfig = {} satisfies ChartConfig;
   const userValue = chartData[dataKey];
-  const userPerc = (userValue / optimalValue) * 100;
+  const higherThan100Good = ["workout"];
+  const userPerc =
+    userValue <= optimalValue || higherThan100Good.includes(dataKey)
+      ? (userValue / optimalValue) * 100
+      : ((optimalValue - (userValue - optimalValue)) / optimalValue) * 100;
 
   return (
     <div className="flex flex-col shadow-sm p-4 rounded-sm">
@@ -45,7 +49,7 @@ export default function ComplianceChart({
             {
               [dataKey]: userValue,
               fill:
-                userPerc > 100 || userPerc < 50
+                userPerc <= 50
                   ? "var(--chart-1)"
                   : userPerc >= 50 && userPerc < 80
                   ? "var(--chart-4)"
@@ -106,7 +110,8 @@ export default function ComplianceChart({
             ? `${label} needs improvement`
             : userPerc < 95
             ? `${label} is fine but not optimal`
-            : userPerc >= 95 && userPerc <= 100
+            : (userPerc >= 95 && userPerc <= 100) ||
+              higherThan100Good.includes(dataKey)
             ? `Looks good`
             : `${label} needs improvement`}
         </div>
