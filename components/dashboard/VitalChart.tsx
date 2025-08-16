@@ -39,7 +39,7 @@ export default function VitalChart({
   });
   return (
     <div className="flex flex-col">
-      <div>{label}</div>
+      <div className="mb-4 font-semibold">{label}</div>
       <ChartContainer
         config={chartConfig}
         className="aspect-auto h-[250px] w-full"

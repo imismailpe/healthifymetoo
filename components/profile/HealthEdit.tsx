@@ -28,6 +28,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useUserQuery } from "@/hooks/useUserQuery";
 import { Checkbox } from "../ui/checkbox";
 import { usePathname, useRouter } from "next/navigation";
+import { Input } from "../ui/input";
 
 const conditions = [
   {
@@ -55,6 +56,8 @@ const conditions = [
 const formSchema = z.object({
   activity_level: z.string(),
   conditions: z.array(z.string()),
+  height: z.number(),
+  weight: z.number(),
 });
 
 export default function HealthEdit() {
@@ -65,6 +68,8 @@ export default function HealthEdit() {
   const defaultValues = {
     activity_level: "Moderate",
     conditions: [],
+    height: 150,
+    weight: 50,
   };
   const [userData, setUserData] = useState(defaultValues);
   const userId = session?.user?.id || "";
@@ -88,6 +93,8 @@ export default function HealthEdit() {
     const values = {
       activity_level: data?.activity_level || "Moderate",
       conditions: data?.conditions || [],
+      height: data?.height,
+      weight: data?.weight,
     };
     form.reset({
       ...values,
@@ -202,7 +209,46 @@ export default function HealthEdit() {
             </FormItem>
           )}
         />
-
+        <FormField
+          control={form.control}
+          name="height"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Height (cms)</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="150"
+                  {...field}
+                  className="w-[80px]"
+                  value={field.value ?? ""}
+                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="weight"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Weight (kg)</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="50"
+                  {...field}
+                  className="w-[80px]"
+                  value={field.value ?? ""}
+                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit" disabled={isPending}>
           Save
         </Button>
@@ -211,10 +257,10 @@ export default function HealthEdit() {
   ) : (
     <div className="flex gap-4 flex-col">
       <Skeleton className="h-12 w-full" />
-      <Skeleton className="h-12 w-[180px]" />
-      <Skeleton className="h-12 w-[180px]" />
       <Skeleton className="h-12 w-full" />
       <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-12 w-[180px]" />
+      <Skeleton className="h-12 w-[180px]" />
     </div>
   );
 }

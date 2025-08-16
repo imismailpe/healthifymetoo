@@ -150,6 +150,7 @@ export function VitalHistory() {
           dataKey2="bp_diastolic"
           label1="Systolic"
           label2="Diastolic"
+          title="Blood Pressure"
         />
         <VitalChart
           timeRange={timeRange}

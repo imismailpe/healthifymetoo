@@ -14,6 +14,7 @@ export default function BPChart({
   dataKey2,
   label1,
   label2,
+  title,
 }: {
   chartData: Record<string, unknown>[];
   timeRange: string;
@@ -21,6 +22,7 @@ export default function BPChart({
   dataKey2: string;
   label1: string;
   label2: string;
+  title: string;
 }) {
   const chartConfig = {
     [dataKey1]: {
@@ -47,9 +49,7 @@ export default function BPChart({
   });
   return (
     <div className="flex flex-col">
-      <div>
-        {label1}/{label2}
-      </div>
+      <div className="mb-4 font-semibold">{title}</div>
       <ChartContainer
         config={chartConfig}
         className="aspect-auto h-[250px] w-full"
@@ -71,12 +71,12 @@ export default function BPChart({
             <linearGradient id={`fill${dataKey2}`} x1="0" y1="0" x2="0" y2="1">
               <stop
                 offset="5%"
-                stopColor="var(--color-chart-5)"
+                stopColor="var(--color-chart-1)"
                 stopOpacity={1.0}
               />
               <stop
                 offset="95%"
-                stopColor="var(--color-chart-5)"
+                stopColor="var(--color-chart-1)"
                 stopOpacity={0.1}
               />
             </linearGradient>
@@ -121,7 +121,7 @@ export default function BPChart({
             dataKey={dataKey2}
             type="natural"
             fill={`url(#fill${dataKey2})`}
-            stroke="var(--color-chart-5)"
+            stroke="var(--color-chart-1)"
             stackId="b"
           />
         </AreaChart>
