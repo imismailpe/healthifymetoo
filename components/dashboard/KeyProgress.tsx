@@ -15,9 +15,9 @@ export default function KeyProgress() {
   const optimal_wakeup = 1.5;
   const chartData = [
     {
-      sleep: 7,
-      dinner: 2,
-      wakeup: 2,
+      sleep: 2,
+      last_meal_gap: 2,
+      wakeup_gap: 2,
       workout: 12,
     },
   ];
@@ -30,30 +30,34 @@ export default function KeyProgress() {
           <CardDescription>Try to improve your points</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col md:flex-row flex-wrap md:flex-nowrap gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
             <ComplianceChart
-              dataKey={"wakeup"}
+              dataKey={"wakeup_gap"}
               label="Wakeup"
+              desc="Wakeup at least 1.5hrs before sunrise"
               chartData={chartData}
               optimalValue={optimal_wakeup}
             />
             <ComplianceChart
-              dataKey={"sleep"}
-              label="Sleep"
-              chartData={chartData}
-              optimalValue={optimal_sleep}
-            />
-            <ComplianceChart
               dataKey={"workout"}
               label="Workout"
+              desc="Workout for at least 15mins a day"
               chartData={chartData}
               optimalValue={optimal_workout}
             />
             <ComplianceChart
-              dataKey={"dinner"}
-              label="Dinner"
+              dataKey={"last_meal_gap"}
+              label="Last meal gap"
+              desc="Eat your last meal at least 3hrs before bed"
               chartData={chartData}
               optimalValue={optimal_dinner}
+            />
+            <ComplianceChart
+              dataKey={"sleep"}
+              label="Sleep"
+              desc="Sleep at least 7hrs"
+              chartData={chartData}
+              optimalValue={optimal_sleep}
             />
           </div>
         </CardContent>

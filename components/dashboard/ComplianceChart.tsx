@@ -13,17 +13,19 @@ export default function ComplianceChart({
   label,
   chartData,
   optimalValue,
+  desc,
 }: {
   dataKey: string;
   label: string;
   chartData: Record<string, number>[];
   optimalValue: number;
+  desc: string;
 }) {
   const chartConfig = {} satisfies ChartConfig;
   const userValue = chartData[0][dataKey];
   const userPerc = (userValue / optimalValue) * 100;
   return (
-    <div className="flex flex-col shadow-sm p-4 rounded-sm justify-center items-center">
+    <div className="flex flex-col shadow-sm p-4 rounded-sm">
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px] min-h-[200px]"
@@ -86,14 +88,17 @@ export default function ComplianceChart({
           </PolarRadiusAxis>
         </RadialBarChart>
       </ChartContainer>
-      <div className="">
-        {userPerc <= 50
-          ? `${label} score needs improvement`
-          : userPerc < 80
-          ? `${label} score needs improvement`
-          : userPerc <= 100
-          ? `${label} score is fine but not optimal`
-          : `${label} score needs improvement`}
+      <div className="flex flex-col gap-4">
+        <div className="text-md font-semibold">
+          {userPerc <= 50
+            ? `${label} is poor`
+            : userPerc < 80
+            ? `${label} needs improvement`
+            : userPerc <= 100
+            ? `${label} is fine but not optimal`
+            : `${label} needs improvement`}
+        </div>
+        <div className="text-sm font-thin">{desc}</div>
       </div>
     </div>
   );
