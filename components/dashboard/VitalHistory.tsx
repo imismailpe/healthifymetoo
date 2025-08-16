@@ -19,60 +19,69 @@ import {
 } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import VitalChart from "./VitalChart";
+import BPChart from "./BPChart";
 
 const chartData = [
   {
     date: "2025-07-16",
-    bp: 10,
+    bp_systolic: 110,
+    bp_diastolic: 70,
     glucose_fasting: 107,
     glucose_after: 200,
     cholestrol: 50,
   },
   {
     date: "2025-07-17",
-    bp: 15,
+    bp_systolic: 125,
+    bp_diastolic: 70,
     glucose_fasting: 106,
     glucose_after: 230,
     cholestrol: 90,
   },
   {
     date: "2025-07-20",
-    bp: 10,
+    bp_systolic: 120,
+    bp_diastolic: 80,
     glucose_fasting: 80,
     glucose_after: 200,
     cholestrol: 56,
   },
   {
     date: "2025-08-04",
-    bp: 12,
+    bp_systolic: 120,
+    bp_diastolic: 70,
     glucose_fasting: 170,
     glucose_after: 170,
     cholestrol: 60,
   },
   {
     date: "2025-08-06",
-    bp: 13,
+    bp_systolic: 130,
+    bp_diastolic: 80,
     glucose_fasting: 175,
     glucose_after: 200,
     cholestrol: 50,
   },
   {
     date: "2025-08-11",
-    bp: 10,
+    bp_systolic: 140,
+    bp_diastolic: 90,
     glucose_fasting: 150,
     glucose_after: 210,
     cholestrol: 95,
   },
   {
     date: "2025-08-12",
-    bp: 0,
+    bp_systolic: 110,
+    bp_diastolic: 80,
     glucose_fasting: 160,
     glucose_after: 200,
     cholestrol: 46,
   },
   {
     date: "2025-08-15",
-    bp: 10,
+    bp_systolic: 120,
+    bp_diastolic: 80,
     glucose_fasting: 110,
     glucose_after: 190,
     cholestrol: 50,
@@ -134,11 +143,13 @@ export function VitalHistory() {
         </CardAction>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <VitalChart
+        <BPChart
           timeRange={timeRange}
           chartData={chartData}
-          dataKey="bp"
-          label="Blood Pressure"
+          dataKey1="bp_systolic"
+          dataKey2="bp_diastolic"
+          label1="Systolic"
+          label2="Diastolic"
         />
         <VitalChart
           timeRange={timeRange}
