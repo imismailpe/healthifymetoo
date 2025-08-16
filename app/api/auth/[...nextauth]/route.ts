@@ -12,12 +12,15 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       profile(profile) {
         return {
-          ...profile,
           id: profile.sub,
           name: profile.name,
           email: profile.email,
           image: profile.picture,
           plan: "free",
+          wakeup_gap: 1.5,
+          workout: 15,
+          last_meal_gap: 3,
+          sleep: 7,
         };
       },
     }),

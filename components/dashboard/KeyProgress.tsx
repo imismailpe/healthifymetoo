@@ -34,6 +34,7 @@ export default function KeyProgress() {
   const userId = session?.user?.id || "";
   const userQuery = useUserQuery(userId);
   const chartDataReady = userQuery.isFetched && !userQuery.isFetching;
+  console.log("userQuery", userQuery.data);
   useEffect(() => {
     if (chartDataReady) {
       const data = userQuery.data.data[0];
