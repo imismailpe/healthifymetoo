@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import UpdateCompliance from "./UpdateCompliance";
 import { useUserQuery } from "@/hooks/useUserQuery";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
+import { Skeleton } from "../ui/skeleton";
 
 export default function KeyProgress() {
   const [updateComplianceOpen, setUpdateComplianceOpen] = useState(false);
@@ -63,34 +64,66 @@ export default function KeyProgress() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-            <ComplianceChart
-              dataKey={"wakeup_gap"}
-              label="Wakeup"
-              desc="Wakeup at least 1.5hrs before sunrise"
-              chartData={chartData}
-              optimalValue={optimal_wakeup}
-            />
-            <ComplianceChart
-              dataKey={"workout"}
-              label="Workout"
-              desc="Workout for at least 15mins a day"
-              chartData={chartData}
-              optimalValue={optimal_workout}
-            />
-            <ComplianceChart
-              dataKey={"last_meal_gap"}
-              label="Last meal gap"
-              desc="Eat your last meal at least 3hrs before bed"
-              chartData={chartData}
-              optimalValue={optimal_dinner}
-            />
-            <ComplianceChart
-              dataKey={"sleep"}
-              label="Sleep"
-              desc="Sleep at least 7hrs"
-              chartData={chartData}
-              optimalValue={optimal_sleep}
-            />
+            {userQuery.isFetching ? (
+              <div className="flex gap-4 flex-col">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            ) : (
+              <ComplianceChart
+                dataKey={"wakeup_gap"}
+                label="Wakeup"
+                desc="Wakeup at least 1.5hrs before sunrise"
+                chartData={chartData}
+                optimalValue={optimal_wakeup}
+              />
+            )}
+            {userQuery.isFetching ? (
+              <div className="flex gap-4 flex-col">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            ) : (
+              <ComplianceChart
+                dataKey={"workout"}
+                label="Workout"
+                desc="Workout for at least 15mins a day"
+                chartData={chartData}
+                optimalValue={optimal_workout}
+              />
+            )}
+            {userQuery.isFetching ? (
+              <div className="flex gap-4 flex-col">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            ) : (
+              <ComplianceChart
+                dataKey={"last_meal_gap"}
+                label="Last meal gap"
+                desc="Eat your last meal at least 3hrs before bed"
+                chartData={chartData}
+                optimalValue={optimal_dinner}
+              />
+            )}
+            {userQuery.isFetching ? (
+              <div className="flex gap-4 flex-col">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            ) : (
+              <ComplianceChart
+                dataKey={"sleep"}
+                label="Sleep"
+                desc="Sleep at least 7hrs"
+                chartData={chartData}
+                optimalValue={optimal_sleep}
+              />
+            )}
           </div>
         </CardContent>
       </Card>

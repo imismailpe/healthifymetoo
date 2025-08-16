@@ -88,8 +88,10 @@ export default function UpdateCompliance({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Wake up</FormLabel>
-                    <div className="flex items-center gap-2">
-                      <span>I woke up at least</span>
+                    <div className="flex items-center gap-x-2 flex-wrap">
+                      <span className="whitespace-nowrap">
+                        I woke up at least
+                      </span>
                       <FormControl>
                         <Input
                           type="number"
@@ -101,7 +103,9 @@ export default function UpdateCompliance({
                           }
                         />
                       </FormControl>
-                      <span>hrs before sunrise</span>
+                      <span className="whitespace-nowrap">
+                        hrs before sunrise
+                      </span>
                     </div>
                     <FormMessage />
                   </FormItem>
@@ -113,8 +117,10 @@ export default function UpdateCompliance({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Workout</FormLabel>
-                    <div className="flex items-center gap-2">
-                      <span>I have worked out at least</span>
+                    <div className="flex items-center gap-x-2 flex-wrap">
+                      <span className="whitespace-nowrap">
+                        I have worked out at least
+                      </span>
                       <FormControl>
                         <Input
                           type="number"
@@ -126,7 +132,9 @@ export default function UpdateCompliance({
                           }
                         />
                       </FormControl>
-                      <span>mins for the day</span>
+                      <span className="whitespace-nowrap">
+                        mins for the day
+                      </span>
                     </div>
                     <FormMessage />
                   </FormItem>
@@ -138,8 +146,10 @@ export default function UpdateCompliance({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Last meal</FormLabel>
-                    <div className="flex items-center gap-2">
-                      <span>I eat my last meal at least</span>
+                    <div className="flex items-center gap-x-2 flex-wrap">
+                      <span className="whitespace-nowrap">
+                        I eat my last meal at least
+                      </span>
                       <FormControl>
                         <Input
                           type="number"
@@ -151,7 +161,9 @@ export default function UpdateCompliance({
                           }
                         />
                       </FormControl>
-                      <span>hrs before going to bed</span>
+                      <span className="whitespace-nowrap">
+                        hrs before going to bed
+                      </span>
                     </div>
                     <FormMessage />
                   </FormItem>
@@ -162,9 +174,11 @@ export default function UpdateCompliance({
                 name="sleep"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last meal</FormLabel>
-                    <div className="flex items-center gap-2">
-                      <span>I have slept at least</span>
+                    <FormLabel>Sleep</FormLabel>
+                    <div className="flex items-center gap-x-2 flex-wrap">
+                      <span className="whitespace-nowrap">
+                        I have slept at least
+                      </span>
                       <FormControl>
                         <Input
                           type="number"
@@ -176,7 +190,7 @@ export default function UpdateCompliance({
                           }
                         />
                       </FormControl>
-                      <span>hrs last night</span>
+                      <span className="whitespace-nowrap">hrs last night</span>
                     </div>
                     <FormMessage />
                   </FormItem>

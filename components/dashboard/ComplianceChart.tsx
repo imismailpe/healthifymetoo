@@ -27,6 +27,7 @@ export default function ComplianceChart({
 
   return (
     <div className="flex flex-col shadow-sm p-4 rounded-sm">
+      <div className="font-semibold">{label}</div>
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px] min-h-[200px]"
