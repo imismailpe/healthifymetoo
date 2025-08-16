@@ -20,10 +20,10 @@ import { useUserQuery } from "@/hooks/useUserQuery";
 import { Skeleton } from "../ui/skeleton";
 
 const formSchema = z.object({
-  wakeup_gap: z.number().min(0.1),
-  workout: z.number().min(0),
-  last_meal_gap: z.number().min(0),
-  sleep: z.number().min(0),
+  wakeup_gap: z.number().min(0.1).max(23),
+  workout: z.number().min(0).max(240),
+  last_meal_gap: z.number().min(0).max(8),
+  sleep: z.number().min(0).max(12),
 });
 export default function UpdateCompliance({
   open,
