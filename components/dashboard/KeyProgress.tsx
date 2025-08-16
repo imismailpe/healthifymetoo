@@ -33,8 +33,9 @@ export default function KeyProgress() {
   const { data: session } = useSessionQuery();
   const userId = session?.user?.id || "";
   const userQuery = useUserQuery(userId);
+  const chartDataReady = userQuery.isFetched && !userQuery.isFetching;
   useEffect(() => {
-    if (userQuery.isFetched) {
+    if (chartDataReady) {
       const data = userQuery.data.data[0];
 
       const values = {
@@ -45,7 +46,7 @@ export default function KeyProgress() {
       };
       setData(values);
     }
-  }, [userQuery.isFetched, userQuery.isFetching]);
+  }, [chartDataReady]);
   const chartData = data;
   return (
     <div className="flex flex-col gap-4 px-4 lg:px-6">
@@ -64,13 +65,7 @@ export default function KeyProgress() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-            {userQuery.isFetching ? (
-              <div className="flex gap-4 flex-col">
-                <Skeleton className="h-12 w-full" />
-                <Skeleton className="h-12 w-full" />
-                <Skeleton className="h-12 w-full" />
-              </div>
-            ) : (
+            {chartDataReady ? (
               <ComplianceChart
                 dataKey={"wakeup_gap"}
                 label="Wakeup"
@@ -78,14 +73,14 @@ export default function KeyProgress() {
                 chartData={chartData}
                 optimalValue={optimal_wakeup}
               />
-            )}
-            {userQuery.isFetching ? (
+            ) : (
               <div className="flex gap-4 flex-col">
                 <Skeleton className="h-12 w-full" />
                 <Skeleton className="h-12 w-full" />
                 <Skeleton className="h-12 w-full" />
               </div>
-            ) : (
+            )}
+            {chartDataReady ? (
               <ComplianceChart
                 dataKey={"workout"}
                 label="Workout"
@@ -93,14 +88,14 @@ export default function KeyProgress() {
                 chartData={chartData}
                 optimalValue={optimal_workout}
               />
-            )}
-            {userQuery.isFetching ? (
+            ) : (
               <div className="flex gap-4 flex-col">
                 <Skeleton className="h-12 w-full" />
                 <Skeleton className="h-12 w-full" />
                 <Skeleton className="h-12 w-full" />
               </div>
-            ) : (
+            )}
+            {chartDataReady ? (
               <ComplianceChart
                 dataKey={"last_meal_gap"}
                 label="Last meal gap"
@@ -108,14 +103,14 @@ export default function KeyProgress() {
                 chartData={chartData}
                 optimalValue={optimal_dinner}
               />
-            )}
-            {userQuery.isFetching ? (
+            ) : (
               <div className="flex gap-4 flex-col">
                 <Skeleton className="h-12 w-full" />
                 <Skeleton className="h-12 w-full" />
                 <Skeleton className="h-12 w-full" />
               </div>
-            ) : (
+            )}
+            {chartDataReady ? (
               <ComplianceChart
                 dataKey={"sleep"}
                 label="Sleep"
@@ -123,6 +118,12 @@ export default function KeyProgress() {
                 chartData={chartData}
                 optimalValue={optimal_sleep}
               />
+            ) : (
+              <div className="flex gap-4 flex-col">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
             )}
           </div>
         </CardContent>
