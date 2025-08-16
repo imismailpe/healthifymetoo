@@ -76,7 +76,7 @@ export default function UpdateCompliance({
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent className="p-4">
         <div className="mx-auto w-full max-w-xl">
-          <DrawerHeader>
+          <DrawerHeader className="p-2">
             <DrawerTitle></DrawerTitle>
           </DrawerHeader>
 
@@ -92,15 +92,13 @@ export default function UpdateCompliance({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Wake up</FormLabel>
-                      <div className="flex items-center gap-x-2 flex-wrap">
-                        <span className="whitespace-nowrap">
-                          I woke up at least
-                        </span>
-                        <FormControl>
+                      <div className="inline">
+                        <div className="inline mr-2">I woke up at least</div>
+                        <FormControl className="inline mr-2">
                           <Input
                             type="number"
                             {...field}
-                            className="w-[80px]"
+                            className="w-[70px]"
                             value={field.value ?? ""}
                             onChange={(e) =>
                               field.onChange(e.target.valueAsNumber)
@@ -108,9 +106,7 @@ export default function UpdateCompliance({
                             step={0.5}
                           />
                         </FormControl>
-                        <span className="whitespace-nowrap">
-                          hrs before sunrise
-                        </span>
+                        <div className="inline">hrs before sunrise</div>
                       </div>
                       <FormMessage />
                     </FormItem>
@@ -122,24 +118,22 @@ export default function UpdateCompliance({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Workout</FormLabel>
-                      <div className="flex items-center gap-x-2 flex-wrap">
-                        <span className="whitespace-nowrap">
+                      <div className="inline">
+                        <span className="inline mr-2">
                           I have worked out at least
                         </span>
-                        <FormControl>
+                        <FormControl className="inline mr-2">
                           <Input
                             type="number"
                             {...field}
-                            className="w-[80px]"
+                            className="w-[70px]"
                             value={field.value ?? ""}
                             onChange={(e) =>
                               field.onChange(e.target.valueAsNumber)
                             }
                           />
                         </FormControl>
-                        <span className="whitespace-nowrap">
-                          mins for the day
-                        </span>
+                        <span className="inlinep">mins for the day</span>
                       </div>
                       <FormMessage />
                     </FormItem>
@@ -151,15 +145,15 @@ export default function UpdateCompliance({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Last meal</FormLabel>
-                      <div className="flex items-center gap-x-2 flex-wrap">
-                        <span className="whitespace-nowrap">
+                      <div className="inline">
+                        <span className="inline mr-2">
                           I eat my last meal at least
                         </span>
-                        <FormControl>
+                        <FormControl className="inline mr-2">
                           <Input
                             type="number"
                             {...field}
-                            className="w-[80px]"
+                            className="w-[70px]"
                             value={field.value ?? ""}
                             onChange={(e) =>
                               field.onChange(e.target.valueAsNumber)
@@ -167,9 +161,7 @@ export default function UpdateCompliance({
                             step={0.5}
                           />
                         </FormControl>
-                        <span className="whitespace-nowrap">
-                          hrs before going to bed
-                        </span>
+                        <span className="inline">hrs before going to bed</span>
                       </div>
                       <FormMessage />
                     </FormItem>
@@ -181,15 +173,15 @@ export default function UpdateCompliance({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Sleep</FormLabel>
-                      <div className="flex items-center gap-x-2 flex-wrap">
-                        <span className="whitespace-nowrap">
+                      <div className="inline">
+                        <span className="inline mr-2">
                           I have slept at least
                         </span>
-                        <FormControl>
+                        <FormControl className="inline mr-2">
                           <Input
                             type="number"
                             {...field}
-                            className="w-[80px]"
+                            className="w-[70px]"
                             value={field.value ?? ""}
                             onChange={(e) =>
                               field.onChange(e.target.valueAsNumber)
@@ -197,9 +189,7 @@ export default function UpdateCompliance({
                             step={0.5}
                           />
                         </FormControl>
-                        <span className="whitespace-nowrap">
-                          hrs last night
-                        </span>
+                        <span className="inline">hrs last night</span>
                       </div>
                       <FormMessage />
                     </FormItem>
