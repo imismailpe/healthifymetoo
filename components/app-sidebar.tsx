@@ -42,11 +42,11 @@ const data = {
       url: "/dashboard",
       icon: IconDashboard,
     },
-    // {
-    //   title: "Lifecycle",
-    //   url: "#",
-    //   icon: IconListDetails,
-    // },
+    {
+      title: "Health",
+      url: "/conditions",
+      icon: IconFileAi,
+    },
     // {
     //   title: "Analytics",
     //   url: "#",

@@ -44,15 +44,15 @@ export async function updateDocument(
 }
 export async function upsertDocument(
   collection: string,
-  id: string,
+  userId: string,
   data: Record<string, unknown>
 ) {
   try {
     const client = await clientPromise;
     const db = client.db("HB");
-    const docId = new ObjectId(id);
+    const uId = new ObjectId(userId);
     //use a different field for query. as id wont be there for first insert
-    const query = { _id: docId };
+    const query = { userId: uId };
     const options = { upsert: true };
     const update = { $set: { ...data } };
     const result = await db
@@ -62,5 +62,23 @@ export async function upsertDocument(
   } catch (e) {
     console.log("error in upsertDocument", e);
     return { success: false, message: `${e}` };
+  }
+}
+export async function getDocumentByQueryId(
+  collection: string,
+  field: string,
+  value: string
+) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("HB");
+    const queryIdObj = new ObjectId(value);
+    const documents = await db
+      .collection(collection)
+      .findOne({ [field]: queryIdObj });
+
+    return { success: true, data: documents };
+  } catch (error) {
+    return { success: false, data: [], message: error };
   }
 }

@@ -27,6 +27,7 @@ import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUserQuery } from "@/hooks/useUserQuery";
+import { usePathname, useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(5, {
@@ -66,6 +67,8 @@ const formSchema = z.object({
 });
 
 export default function ProfileEdit() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const { data: session } = useSessionQuery();
   const defaultValues = {
@@ -110,6 +113,9 @@ export default function ProfileEdit() {
       method: "POST",
       body: JSON.stringify({ ...values, id: userId }),
     });
+    if (pathname === "/profile") {
+      router.push("/health");
+    }
     setIsPending(false);
   }
   return !userQuery.isFetching ? (

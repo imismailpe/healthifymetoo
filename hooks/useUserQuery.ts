@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export function useUserQuery(userId: string) {
   return useQuery({

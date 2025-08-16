@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
 
 const handler = NextAuth({
   adapter: MongoDBAdapter(clientPromise, { databaseName: "HB" }),
@@ -35,15 +34,15 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       // Runs on initial sign in
-      if (user) {
-        const client = await clientPromise;
-        const db = client.db();
-        const existingUser = await db
-          .collection("users")
-          .findOne({ _id: new ObjectId(user.id) });
+      // if (user) {
+      //   const client = await clientPromise;
+      //   const db = client.db();
+      //   const existingUser = await db
+      //     .collection("users")
+      //     .findOne({ _id: new ObjectId(user.id) });
 
-        token.plan = existingUser?.plan || "free";
-      }
+      //   token.plan = existingUser?.plan || "free";
+      // }
       return token;
     },
     async session({ session, token }) {

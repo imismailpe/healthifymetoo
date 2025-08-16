@@ -1,0 +1,210 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { useEffect, useState } from "react";
+import { useSessionQuery } from "@/hooks/useSessionQuery";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useUserQuery } from "@/hooks/useUserQuery";
+import { Checkbox } from "../ui/checkbox";
+import { usePathname, useRouter } from "next/navigation";
+
+const conditions = [
+  {
+    id: "diabetes",
+    label: "Diabetes",
+  },
+  {
+    id: "hypertension",
+    label: "Hypertension",
+  },
+  {
+    id: "cardiac_issues",
+    label: "Cardiac issues",
+  },
+  {
+    id: "hyperthyrodism",
+    label: "Hyperthyrodism",
+  },
+  {
+    id: "hypothyroidism",
+    label: "Hypothyroidism",
+  },
+] as const;
+
+const formSchema = z.object({
+  activity_level: z.string(),
+  conditions: z.array(z.string()),
+});
+
+export default function HealthEdit() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
+  const { data: session } = useSessionQuery();
+  const defaultValues = {
+    activity_level: "Moderate",
+    conditions: [],
+  };
+  const [userData, setUserData] = useState(defaultValues);
+  const userId = session?.user?.id || "";
+
+  const userQuery = useUserQuery(userId);
+
+  const healthQuery = useQuery({
+    queryKey: ["health"],
+    enabled: !!userId, // run only when id is available
+    queryFn: async () => {
+      const result = await fetch(`/api/health?userId=${userId}`);
+      const json = await result.json();
+      return json;
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  const fillUser = () => {
+    const data = healthQuery.data?.data;
+    const values = {
+      activity_level: data?.activity_level || "Moderate",
+      conditions: data?.conditions || [],
+    };
+    form.reset({
+      ...values,
+    });
+    setUserData(values);
+  };
+  useEffect(() => {
+    if (userId && healthQuery.isFetched) {
+      fillUser();
+    }
+  }, [userId, healthQuery.isFetched]);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: userData,
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsPending(true);
+    await fetch("/api/health", {
+      method: "POST",
+      body: JSON.stringify({ ...values, userId }),
+    });
+    if (pathname === "/health") {
+      router.push("/dashboard");
+    }
+    setIsPending(false);
+  }
+  return !userQuery.isFetching ? (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="activity_level"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Activity Level</FormLabel>
+              <FormControl>
+                <Select
+                  {...field}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Moderate" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Mild">Mild</SelectItem>
+                    <SelectItem value="Moderate">Moderate</SelectItem>
+                    <SelectItem value="Extreme">Extreme</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="conditions"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Health Condition</FormLabel>
+                <FormDescription>
+                  Select the health conditions you already have:
+                </FormDescription>
+              </div>
+              {conditions.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="conditions"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-center gap-2"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== item.id
+                                    )
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit" disabled={isPending}>
+          Save
+        </Button>
+      </form>
+    </Form>
+  ) : (
+    <div className="flex gap-4 flex-col">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-12 w-[180px]" />
+      <Skeleton className="h-12 w-[180px]" />
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-12 w-full" />
+    </div>
+  );
+}

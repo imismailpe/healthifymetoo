@@ -14,8 +14,10 @@ import UpdateCompliance from "./UpdateCompliance";
 import { useUserQuery } from "@/hooks/useUserQuery";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { Skeleton } from "../ui/skeleton";
+import { useRouter } from "next/navigation";
 
 export default function KeyProgress() {
+  const router = useRouter();
   const [updateComplianceOpen, setUpdateComplianceOpen] = useState(false);
   const optimal_sleep = 7;
   const optimal_dinner = 3;
@@ -34,7 +36,7 @@ export default function KeyProgress() {
   const userId = session?.user?.id || "";
   const userQuery = useUserQuery(userId);
   const chartDataReady = userQuery.isFetched && !userQuery.isFetching;
-  console.log("userQuery", userQuery.data);
+
   useEffect(() => {
     if (chartDataReady) {
       const data = userQuery.data.data[0];
@@ -46,6 +48,9 @@ export default function KeyProgress() {
         sleep: data.sleep,
       };
       setData(values);
+      if (!data.dob) {
+        router.push("/profile");
+      }
     }
   }, [chartDataReady]);
   const chartData = data;
