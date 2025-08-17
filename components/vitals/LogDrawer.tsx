@@ -59,8 +59,8 @@ export function LogDrawer({
     });
     queryClient.invalidateQueries({ queryKey: ["vitals"] });
     setIsPending(false);
-    onOpenChange(false);
     setReadingIndex(0);
+    onOpenChange(false);
   };
   const config =
     readingIndex === 0
