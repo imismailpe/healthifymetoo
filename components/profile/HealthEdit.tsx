@@ -29,6 +29,7 @@ import { useUserQuery } from "@/hooks/useUserQuery";
 import { Checkbox } from "../ui/checkbox";
 import { usePathname, useRouter } from "next/navigation";
 import { Input } from "../ui/input";
+import { useHealthQuery } from "@/hooks/useHealthQuery";
 
 const conditions = [
   {
@@ -75,16 +76,7 @@ export default function HealthEdit() {
   const userQuery = useUserQuery(userId);
   const queryClient = useQueryClient();
 
-  const healthQuery = useQuery({
-    queryKey: ["health"],
-    enabled: !!userId, // run only when id is available
-    queryFn: async () => {
-      const result = await fetch(`/api/health?userId=${userId}`);
-      const json = await result.json();
-      return json;
-    },
-    refetchOnWindowFocus: false,
-  });
+  const healthQuery = useHealthQuery(userId);
 
   const fillUser = () => {
     const data = healthQuery.data?.data;

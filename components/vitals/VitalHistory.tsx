@@ -23,81 +23,7 @@ import BPChart from "./BPChart";
 import { useQuery } from "@tanstack/react-query";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { Skeleton } from "../ui/skeleton";
-
-const c = [
-  {
-    date: "2025-07-26",
-    bp_systolic: 110,
-    bp_diastolic: 70,
-    glucose_fasting: 107,
-    glucose_after: 200,
-    cholestrol: 50,
-    weight: 55,
-  },
-  {
-    date: "2025-07-27",
-    bp_systolic: 125,
-    bp_diastolic: 70,
-    glucose_fasting: 106,
-    glucose_after: 230,
-    cholestrol: 90,
-    weight: 52,
-  },
-  {
-    date: "2025-07-30",
-    bp_systolic: 120,
-    bp_diastolic: 80,
-    glucose_fasting: 80,
-    glucose_after: 200,
-    cholestrol: 56,
-    weight: 56,
-  },
-  {
-    date: "2025-08-04",
-    bp_systolic: 120,
-    bp_diastolic: 70,
-    glucose_fasting: 170,
-    glucose_after: 170,
-    cholestrol: 60,
-    weight: 50,
-  },
-  {
-    date: "2025-08-06",
-    bp_systolic: 130,
-    bp_diastolic: 80,
-    glucose_fasting: 175,
-    glucose_after: 200,
-    cholestrol: 50,
-    weight: 55,
-  },
-  {
-    date: "2025-08-11",
-    bp_systolic: 140,
-    bp_diastolic: 90,
-    glucose_fasting: 150,
-    glucose_after: 210,
-    cholestrol: 95,
-    weight: 55,
-  },
-  {
-    date: "2025-08-12",
-    bp_systolic: 110,
-    bp_diastolic: 80,
-    glucose_fasting: 160,
-    glucose_after: 200,
-    cholestrol: 46,
-    weight: 57,
-  },
-  {
-    date: "2025-08-15",
-    bp_systolic: 120,
-    bp_diastolic: 80,
-    glucose_fasting: 110,
-    glucose_after: 190,
-    cholestrol: 50,
-    weight: 58,
-  },
-];
+import { useVitalsQuery } from "@/hooks/useVitalsQuery";
 
 export function VitalHistory() {
   const isMobile = useIsMobile();
@@ -106,23 +32,14 @@ export function VitalHistory() {
   const { data: session } = useSessionQuery();
   const userId = session?.user?.id || "";
 
-  const vitalsQuery = useQuery({
-    queryKey: ["vitals"],
-    enabled: !!userId,
-    queryFn: async () => {
-      const result = await fetch(`/api/vitals?userId=${userId}`);
-      const resultJson = await result.json();
-      return resultJson;
-    },
-    refetchOnWindowFocus: false,
-  });
+  const vitalsQuery = useVitalsQuery(userId);
   const chartData = vitalsQuery?.data?.data || [];
   React.useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");
     }
   }, [isMobile]);
-  console.log("vitalsQuery", vitalsQuery?.data);
+
   return (
     <Card className="@container/card">
       <CardHeader>
