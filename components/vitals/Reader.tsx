@@ -9,42 +9,42 @@ import {
 import { Button } from "../ui/button";
 import { Minus, Plus } from "lucide-react";
 
-export default function AfterFoodGlucose({
+export default function Reader({
+  readingIndex,
+  title,
+  desc,
+  min,
+  max,
+  unit,
+  step,
+  reading,
+  disabled,
+  setReading,
   onNextStep,
   onPrevStep,
 }: {
+  readingIndex: number;
+  title: string;
+  desc: string;
+  min: number;
+  max: number;
+  unit: string;
+  step: number;
+  optimal: number;
+  reading: number;
+  disabled: boolean;
+  setReading: (val: number) => void;
   onNextStep: () => void;
   onPrevStep: () => void;
 }) {
-  const data = [
-    {
-      goal: 100,
-    },
-    {
-      goal: 110,
-    },
-    {
-      goal: 120,
-    },
-    {
-      goal: 130,
-    },
-    {
-      goal: 140,
-    },
-  ];
-  const [goal, setGoal] = useState(120);
-
   function onClick(adjustment: number) {
-    setGoal(Math.max(120, Math.min(400, goal + adjustment)));
+    setReading(Math.max(min, Math.min(max, reading + adjustment)));
   }
   return (
     <div className="mx-auto w-full max-w-sm">
       <DrawerHeader>
-        <DrawerTitle>Blood Glucose (After food)</DrawerTitle>
-        <DrawerDescription>
-          Record your glucose reading after food
-        </DrawerDescription>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{desc}</DrawerDescription>
       </DrawerHeader>
       <div className="p-4 pb-0">
         <div className="flex items-center justify-center space-x-2">
@@ -52,22 +52,22 @@ export default function AfterFoodGlucose({
             variant="outline"
             size="icon"
             className="h-8 w-8 shrink-0 rounded-full"
-            onClick={() => onClick(-10)}
-            disabled={goal <= 70}
+            onClick={() => onClick(-step)}
+            disabled={disabled || reading <= min}
           >
             <Minus />
             <span className="sr-only">Decrease</span>
           </Button>
           <div className="flex-1 text-center">
-            <div className="text-7xl font-bold tracking-tighter">{goal}</div>
-            <div className="text-muted-foreground text-[0.70rem]">mg/dL</div>
+            <div className="text-7xl font-bold tracking-tighter">{reading}</div>
+            <div className="text-muted-foreground text-[0.70rem]">{unit}</div>
           </div>
           <Button
             variant="outline"
             size="icon"
             className="h-8 w-8 shrink-0 rounded-full"
-            onClick={() => onClick(10)}
-            disabled={goal >= 300}
+            onClick={() => onClick(step)}
+            disabled={disabled || reading >= max}
           >
             <Plus />
             <span className="sr-only">Increase</span>
@@ -76,11 +76,20 @@ export default function AfterFoodGlucose({
       </div>
       <DrawerFooter>
         <div className="flex gap-4 justify-between w-full">
-          <Button onClick={onPrevStep}>Prev</Button>
-          <Button onClick={onNextStep}>Next</Button>
+          <Button
+            onClick={onPrevStep}
+            disabled={disabled || readingIndex === 0}
+          >
+            Prev
+          </Button>
+          <Button onClick={onNextStep} disabled={disabled}>
+            Next
+          </Button>
         </div>
         <DrawerClose asChild>
-          <Button variant="outline">Cancel</Button>
+          <Button variant="outline" disabled={disabled}>
+            Cancel
+          </Button>
         </DrawerClose>
       </DrawerFooter>
     </div>

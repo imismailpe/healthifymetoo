@@ -1,6 +1,6 @@
 "use client";
 import { AppSidebar } from "@/components/app-sidebar";
-import { LogDrawer } from "@/components/HealthLog/LogDrawer";
+import { LogDrawer } from "@/components/vitals/LogDrawer";
 // import { DataTable } from "@/components/data-table";
 // import { SectionCards } from "@/components/section-cards";
 import { SiteHeader } from "@/components/site-header";
@@ -9,7 +9,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useState } from "react";
 import { HeartPlus } from "lucide-react";
 import KeyProgress from "@/components/dashboard/KeyProgress";
-import { VitalHistory } from "@/components/dashboard/VitalHistory";
+import { VitalHistory } from "@/components/vitals/VitalHistory";
 
 export default function Page() {
   const [logOpen, setLogOpen] = useState(false);

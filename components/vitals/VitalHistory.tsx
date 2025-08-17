@@ -20,8 +20,11 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import VitalChart from "./VitalChart";
 import BPChart from "./BPChart";
+import { useQuery } from "@tanstack/react-query";
+import { useSessionQuery } from "@/hooks/useSessionQuery";
+import { Skeleton } from "../ui/skeleton";
 
-const chartData = [
+const c = [
   {
     date: "2025-07-26",
     bp_systolic: 110,
@@ -100,12 +103,26 @@ export function VitalHistory() {
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = React.useState("30d");
 
+  const { data: session } = useSessionQuery();
+  const userId = session?.user?.id || "";
+
+  const vitalsQuery = useQuery({
+    queryKey: ["vitals"],
+    enabled: !!userId,
+    queryFn: async () => {
+      const result = await fetch(`/api/vitals?userId=${userId}`);
+      const resultJson = await result.json();
+      return resultJson;
+    },
+    refetchOnWindowFocus: false,
+  });
+  const chartData = vitalsQuery?.data?.data || [];
   React.useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");
     }
   }, [isMobile]);
-
+  console.log("vitalsQuery", vitalsQuery?.data);
   return (
     <Card className="@container/card">
       <CardHeader>
@@ -123,12 +140,17 @@ export function VitalHistory() {
             onValueChange={setTimeRange}
             variant="outline"
             className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex"
+            disabled={vitalsQuery.isFetching}
           >
             <ToggleGroupItem value="30d">Last 30 days</ToggleGroupItem>
             <ToggleGroupItem value="20d">Last 20 days</ToggleGroupItem>
             <ToggleGroupItem value="7d">Last 7 days</ToggleGroupItem>
           </ToggleGroup>
-          <Select value={timeRange} onValueChange={setTimeRange}>
+          <Select
+            value={timeRange}
+            onValueChange={setTimeRange}
+            disabled={vitalsQuery.isFetching}
+          >
             <SelectTrigger
               className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
               size="sm"
@@ -151,43 +173,83 @@ export function VitalHistory() {
         </CardAction>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <BPChart
-          timeRange={timeRange}
-          chartData={chartData}
-          dataKey1="bp_systolic"
-          dataKey2="bp_diastolic"
-          label1="Systolic"
-          label2="Diastolic"
-          title="Blood Pressure(mmHG)"
-        />
-        <VitalChart
-          timeRange={timeRange}
-          chartData={chartData}
-          dataKey="cholestrol"
-          label="(mg/dL)"
-          title="Cholestrol(mg/dL)"
-        />
-        <VitalChart
-          timeRange={timeRange}
-          chartData={chartData}
-          dataKey="glucose_fasting"
-          label="(mmol/L)"
-          title="Glucose while fasting(mmol/L)"
-        />
-        <VitalChart
-          timeRange={timeRange}
-          chartData={chartData}
-          dataKey="glucose_after"
-          label="(mmol/L)"
-          title="Glucose after food(mmol/L)"
-        />
-        <VitalChart
-          timeRange={timeRange}
-          chartData={chartData}
-          dataKey="weight"
-          label="kg"
-          title="Weight(kg)"
-        />
+        {vitalsQuery.isFetched ? (
+          <BPChart
+            timeRange={timeRange}
+            chartData={chartData}
+            dataKey1="bp_systolic"
+            dataKey2="bp_diastolic"
+            label1="Systolic"
+            label2="Diastolic"
+            title="Blood Pressure(mmHG)"
+          />
+        ) : (
+          <div className="flex gap-4 flex-col">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        )}
+        {vitalsQuery.isFetched ? (
+          <VitalChart
+            timeRange={timeRange}
+            chartData={chartData}
+            dataKey="cholestrol"
+            label="(mg/dL)"
+            title="Cholestrol(mg/dL)"
+          />
+        ) : (
+          <div className="flex gap-4 flex-col">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        )}
+        {vitalsQuery.isFetched ? (
+          <VitalChart
+            timeRange={timeRange}
+            chartData={chartData}
+            dataKey="glucose_fasting"
+            label="(mmol/L)"
+            title="Glucose while fasting(mmol/L)"
+          />
+        ) : (
+          <div className="flex gap-4 flex-col">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        )}
+        {vitalsQuery.isFetched ? (
+          <VitalChart
+            timeRange={timeRange}
+            chartData={chartData}
+            dataKey="glucose_after"
+            label="(mmol/L)"
+            title="Glucose after food(mmol/L)"
+          />
+        ) : (
+          <div className="flex gap-4 flex-col">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        )}
+        {vitalsQuery.isFetched ? (
+          <VitalChart
+            timeRange={timeRange}
+            chartData={chartData}
+            dataKey="weight"
+            label="kg"
+            title="Weight(kg)"
+          />
+        ) : (
+          <div className="flex gap-4 flex-col">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

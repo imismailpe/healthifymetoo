@@ -42,7 +42,7 @@ export async function updateDocument(
     return { success: false, message: error };
   }
 }
-export async function upsertDocument(
+export async function upsertDocumentByUserId(
   collection: string,
   userId: string,
   data: Record<string, unknown>
@@ -51,7 +51,7 @@ export async function upsertDocument(
     const client = await clientPromise;
     const db = client.db("HB");
     const uId = new ObjectId(userId);
-    //use a different field for query. as id wont be there for first insert
+
     const query = { userId: uId };
     const options = { upsert: true };
     const update = { $set: { ...data } };
@@ -60,7 +60,7 @@ export async function upsertDocument(
       .updateOne(query, update, options);
     return { success: result.acknowledged, message: "Added successfully" };
   } catch (e) {
-    console.log("error in upsertDocument", e);
+    console.log("error in upsertDocumentByUserId", e);
     return { success: false, message: `${e}` };
   }
 }
@@ -75,10 +75,34 @@ export async function getDocumentByQueryId(
     const queryIdObj = new ObjectId(value);
     const documents = await db
       .collection(collection)
-      .findOne({ [field]: queryIdObj });
+      .find({ [field]: queryIdObj })
+      .toArray();
 
     return { success: true, data: documents };
   } catch (error) {
     return { success: false, data: [], message: error };
+  }
+}
+export async function upsertDocumentByUserIdDate(
+  collection: string,
+  userId: string,
+  date: string,
+  data: Record<string, unknown>
+) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("HB");
+    const uId = new ObjectId(userId);
+
+    const query = { userId: uId, date };
+    const options = { upsert: true };
+    const update = { $set: { ...data } };
+    const result = await db
+      .collection(collection)
+      .updateOne(query, update, options);
+    return { success: result.acknowledged, message: "Added successfully" };
+  } catch (e) {
+    console.log("error in upsertDocumentByUserId", e);
+    return { success: false, message: `${e}` };
   }
 }

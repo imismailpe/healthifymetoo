@@ -1,15 +1,20 @@
-import { getDocumentByQueryId, upsertDocumentByUserId } from "../functions";
+import { getDocumentByQueryId, upsertDocumentByUserIdDate } from "../functions";
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { userId, ...data } = body;
+  const { userId, date, ...data } = body;
   try {
-    const result = await upsertDocumentByUserId("health", userId, data);
+    const result = await upsertDocumentByUserIdDate(
+      "vitals",
+      userId,
+      date,
+      data
+    );
     return new Response(JSON.stringify(result), {
       status: 200,
     });
   } catch (e) {
-    console.log("error in user health update api", e);
+    console.log("error in user vitals update api", e);
     return new Response(
       JSON.stringify({
         success: false,
@@ -27,13 +32,13 @@ export async function GET(req: Request) {
 
   try {
     const result = await getDocumentByQueryId(
-      "health",
+      "vitals",
       "userId",
       userId as string
     );
     return new Response(JSON.stringify(result), { status: 200 });
   } catch (e) {
-    console.log("error in user health get api", e);
+    console.log("error in user vitals get api", e);
     return new Response(
       JSON.stringify({
         success: false,
