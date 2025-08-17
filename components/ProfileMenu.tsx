@@ -12,6 +12,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useUserQuery } from "@/hooks/useUserQuery";
 import UserCard from "./profile/UserCard";
+import { Skeleton } from "./ui/skeleton";
 
 export default function ProfileMenu() {
   const { data: session } = useSessionQuery();
@@ -25,7 +26,12 @@ export default function ProfileMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {userData ? (
+        {userQuery.isFetching ? (
+          <div className="flex gap-4 flex-col">
+            <Skeleton className="h-12 w-[180px]" />
+            <Skeleton className="h-12 w-[180px]" />
+          </div>
+        ) : userData ? (
           <div className="p-4 rounded flex flex-col gap-4">
             <UserCard />
             <Link href="/dashboard">Dashboard</Link>

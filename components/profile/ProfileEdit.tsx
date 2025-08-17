@@ -128,7 +128,7 @@ export default function ProfileEdit() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     mutation.mutate(values);
   }
-  return !userQuery.isFetching ? (
+  return userQuery.isFetched ? (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField

@@ -79,7 +79,7 @@ export default function HealthEdit() {
   const healthQuery = useHealthQuery(userId);
 
   const fillUser = () => {
-    const data = healthQuery.data?.data;
+    const data = healthQuery.data?.data[0];
     const values = {
       activity_level: data?.activity_level || "Moderate",
       conditions: data?.conditions || [],
@@ -121,7 +121,7 @@ export default function HealthEdit() {
     mutation.mutate(values);
   }
 
-  return !userQuery.isFetching ? (
+  return userQuery.isFetched ? (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
