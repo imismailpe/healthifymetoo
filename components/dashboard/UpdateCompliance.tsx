@@ -147,7 +147,7 @@ export default function UpdateCompliance({
                       <FormLabel>Last meal</FormLabel>
                       <div className="inline">
                         <span className="inline mr-2">
-                          I eat my last meal at least
+                          I aet my last meal at least
                         </span>
                         <FormControl className="inline mr-2">
                           <Input
