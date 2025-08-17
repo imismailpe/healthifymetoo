@@ -60,6 +60,7 @@ export function LogDrawer({
     queryClient.invalidateQueries({ queryKey: ["vitals"] });
     setIsPending(false);
     onOpenChange(false);
+    setReadingIndex(0);
   };
   const config =
     readingIndex === 0
@@ -94,8 +95,8 @@ export function LogDrawer({
         }
       : readingIndex === 3
       ? {
-          title: "Glucose while fasting",
-          desc: "",
+          title: "Glucose - fasting",
+          desc: "Blood glucose level",
           min: 80,
           max: 220,
           unit: "mmol/L",
@@ -104,8 +105,8 @@ export function LogDrawer({
         }
       : readingIndex === 4
       ? {
-          title: "Glucose after food",
-          desc: "",
+          title: "Glucose - after food",
+          desc: "Blood glucose level",
           min: 80,
           max: 350,
           unit: "mmol/L",
@@ -114,7 +115,7 @@ export function LogDrawer({
         }
       : {
           title: "Weight",
-          desc: "",
+          desc: "Body weight",
           min: 30,
           max: 500,
           unit: "kg",
