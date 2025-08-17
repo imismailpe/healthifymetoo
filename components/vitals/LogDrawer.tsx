@@ -86,7 +86,7 @@ export function LogDrawer({
       : readingIndex === 2
       ? {
           title: "Cholestrol",
-          desc: "",
+          desc: "Cholestrol level",
           min: 8,
           max: 22,
           unit: "mg/dL",
@@ -95,7 +95,7 @@ export function LogDrawer({
         }
       : readingIndex === 3
       ? {
-          title: "Glucose - fasting",
+          title: "Glucose - Fasting",
           desc: "Blood glucose level",
           min: 80,
           max: 220,
@@ -105,7 +105,7 @@ export function LogDrawer({
         }
       : readingIndex === 4
       ? {
-          title: "Glucose - after food",
+          title: "Glucose - After food",
           desc: "Blood glucose level",
           min: 80,
           max: 350,
