@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import Link from "next/link";
+import { useUserQuery } from "@/hooks/useUserQuery";
 
 const data = {
   navMain: [
@@ -150,6 +151,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = useSessionQuery();
+  const userQuery = useUserQuery(session?.user?.id);
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -173,7 +175,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        {session?.user ? <NavUser user={session.user} /> : null}
+        {session?.user ? <NavUser user={userQuery?.data?.data[0]} /> : null}
       </SidebarFooter>
     </Sidebar>
   );

@@ -25,6 +25,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { signOut } from "next-auth/react";
+import UserCard from "./profile/UserCard";
 
 export function NavUser({
   user,
@@ -36,7 +37,7 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  const userLetter = user.name.slice(0, 1);
+  const userLetter = user?.name.slice(0, 1);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -47,15 +48,15 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={userLetter} alt={user.name} />
+                <AvatarImage src={userLetter} alt={user?.name} />
                 <AvatarFallback className="rounded-lg">
                   {userLetter}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium">{user?.name}</span>
                 <span className="text-muted-foreground truncate text-xs">
-                  {user.email}
+                  {user?.email}
                 </span>
               </div>
               <IconDotsVertical className="ml-auto size-4" />
@@ -68,20 +69,7 @@ export function NavUser({
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={userLetter} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">
-                    {userLetter}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="text-muted-foreground truncate text-xs">
-                    {user.email}
-                  </span>
-                </div>
-              </div>
+              <UserCard />
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>

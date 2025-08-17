@@ -1,3 +1,4 @@
+"use client";
 import HealthEdit from "@/components/profile/HealthEdit";
 import React from "react";
 

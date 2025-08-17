@@ -9,9 +9,14 @@ import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { User } from "lucide-react";
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { useUserQuery } from "@/hooks/useUserQuery";
+import UserCard from "./profile/UserCard";
 
 export default function ProfileMenu() {
   const { data: session } = useSessionQuery();
+  const userQuery = useUserQuery(session?.user?.id);
+  const userData = userQuery?.data?.data[0];
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -20,12 +25,14 @@ export default function ProfileMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {session?.user ? (
+        {userData ? (
           <div className="p-4 rounded flex flex-col gap-4">
-            <a href="/dashboard">Dashboard</a>
-            <div>{session.user.name}</div>
-            <div>{session.user.email}</div>
-            <div>Plan: {session.user.plan}</div>
+            <UserCard />
+            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/conditions">Health</Link>
+            <Link href="/settings">Settings</Link>
+
+            <div>Plan: {userData.plan}</div>
             <Button
               variant={"secondary"}
               onClick={() =>

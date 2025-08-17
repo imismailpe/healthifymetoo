@@ -1,3 +1,4 @@
+"use client";
 import { AppSidebar } from "@/components/app-sidebar";
 import HealthEdit from "@/components/profile/HealthEdit";
 import { SiteHeader } from "@/components/site-header";

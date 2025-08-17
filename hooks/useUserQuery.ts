@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useUserQuery(userId: string) {
   return useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", userId],
     enabled: !!userId, // run only when id is available
     queryFn: async () => {
       const result = await fetch(`/api/user?id=${userId}`);
@@ -10,5 +10,6 @@ export function useUserQuery(userId: string) {
       return json;
     },
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 }

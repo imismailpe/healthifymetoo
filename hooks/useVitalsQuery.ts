@@ -10,5 +10,6 @@ export function useVitalsQuery(userId: string) {
       return json;
     },
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 }

@@ -10,5 +10,6 @@ export function useHealthQuery(userId: string) {
       return json;
     },
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 }
