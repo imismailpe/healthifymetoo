@@ -107,7 +107,7 @@ export default function KeyProgress() {
               <ComplianceChart
                 dataKey={"last_meal_gap"}
                 label="Last meal gap"
-                desc="Eat your last meal at least 3hrs before bed"
+                desc="Eat your last meal at least 3hrs before going to bed"
                 chartData={chartData}
                 optimalValue={optimal_dinner}
                 unit="Hrs"
