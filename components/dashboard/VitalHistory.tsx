@@ -23,28 +23,31 @@ import BPChart from "./BPChart";
 
 const chartData = [
   {
-    date: "2025-07-16",
+    date: "2025-07-26",
     bp_systolic: 110,
     bp_diastolic: 70,
     glucose_fasting: 107,
     glucose_after: 200,
     cholestrol: 50,
+    weight: 55,
   },
   {
-    date: "2025-07-17",
+    date: "2025-07-27",
     bp_systolic: 125,
     bp_diastolic: 70,
     glucose_fasting: 106,
     glucose_after: 230,
     cholestrol: 90,
+    weight: 52,
   },
   {
-    date: "2025-07-20",
+    date: "2025-07-30",
     bp_systolic: 120,
     bp_diastolic: 80,
     glucose_fasting: 80,
     glucose_after: 200,
     cholestrol: 56,
+    weight: 56,
   },
   {
     date: "2025-08-04",
@@ -53,6 +56,7 @@ const chartData = [
     glucose_fasting: 170,
     glucose_after: 170,
     cholestrol: 60,
+    weight: 50,
   },
   {
     date: "2025-08-06",
@@ -61,6 +65,7 @@ const chartData = [
     glucose_fasting: 175,
     glucose_after: 200,
     cholestrol: 50,
+    weight: 55,
   },
   {
     date: "2025-08-11",
@@ -69,6 +74,7 @@ const chartData = [
     glucose_fasting: 150,
     glucose_after: 210,
     cholestrol: 95,
+    weight: 55,
   },
   {
     date: "2025-08-12",
@@ -77,6 +83,7 @@ const chartData = [
     glucose_fasting: 160,
     glucose_after: 200,
     cholestrol: 46,
+    weight: 57,
   },
   {
     date: "2025-08-15",
@@ -85,6 +92,7 @@ const chartData = [
     glucose_fasting: 110,
     glucose_after: 190,
     cholestrol: 50,
+    weight: 58,
   },
 ];
 
@@ -172,6 +180,13 @@ export function VitalHistory() {
           dataKey="glucose_after"
           label="(mmol/L)"
           title="Glucose after food(mmol/L)"
+        />
+        <VitalChart
+          timeRange={timeRange}
+          chartData={chartData}
+          dataKey="weight"
+          label="kg"
+          title="Weight(kg)"
         />
       </CardContent>
     </Card>

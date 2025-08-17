@@ -57,7 +57,6 @@ const formSchema = z.object({
   activity_level: z.string(),
   conditions: z.array(z.string()),
   height: z.number(),
-  weight: z.number(),
 });
 
 export default function HealthEdit() {
@@ -69,7 +68,6 @@ export default function HealthEdit() {
     activity_level: "Moderate",
     conditions: [],
     height: 150,
-    weight: 50,
   };
   const [userData, setUserData] = useState(defaultValues);
   const userId = session?.user?.id || "";
@@ -94,7 +92,6 @@ export default function HealthEdit() {
       activity_level: data?.activity_level || "Moderate",
       conditions: data?.conditions || [],
       height: data?.height,
-      weight: data?.weight,
     };
     form.reset({
       ...values,
@@ -141,6 +138,9 @@ export default function HealthEdit() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Activity Level</FormLabel>
+              <FormDescription>
+                How active are you in a typical day?
+              </FormDescription>
               <FormControl>
                 <Select
                   {...field}
@@ -166,12 +166,11 @@ export default function HealthEdit() {
           name="conditions"
           render={() => (
             <FormItem>
-              <div className="mb-4">
-                <FormLabel className="text-base">Health Condition</FormLabel>
-                <FormDescription>
-                  Select the health conditions you already have:
-                </FormDescription>
-              </div>
+              <FormLabel className="text-base">Health Condition</FormLabel>
+              <FormDescription>
+                Select the health conditions you already have:
+              </FormDescription>
+
               {conditions.map((item) => (
                 <FormField
                   key={item.id}
@@ -215,30 +214,11 @@ export default function HealthEdit() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Height (cms)</FormLabel>
+              <FormDescription>How tall are you?</FormDescription>
               <FormControl>
                 <Input
                   type="number"
                   placeholder="150"
-                  {...field}
-                  className="w-[80px]"
-                  value={field.value ?? ""}
-                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="weight"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Weight (kg)</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="50"
                   {...field}
                   className="w-[80px]"
                   value={field.value ?? ""}
