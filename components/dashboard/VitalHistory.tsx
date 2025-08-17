@@ -150,25 +150,25 @@ export function VitalHistory() {
           dataKey2="bp_diastolic"
           label1="Systolic"
           label2="Diastolic"
-          title="Blood Pressure"
+          title="Blood Pressure(mmHG)"
         />
         <VitalChart
           timeRange={timeRange}
           chartData={chartData}
           dataKey="cholestrol"
-          label="Cholestrol"
+          label="Cholestrol(mg/dL)"
         />
         <VitalChart
           timeRange={timeRange}
           chartData={chartData}
           dataKey="glucose_fasting"
-          label="Glucose while fasting"
+          label="Glucose while fasting(mmol/L)"
         />
         <VitalChart
           timeRange={timeRange}
           chartData={chartData}
           dataKey="glucose_after"
-          label="Glucose after food"
+          label="Glucose after food(mmol/L)"
         />
       </CardContent>
     </Card>
