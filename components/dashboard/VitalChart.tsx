@@ -12,11 +12,13 @@ export default function VitalChart({
   timeRange,
   dataKey,
   label,
+  title
 }: {
   chartData: Record<string, unknown>[];
   timeRange: string;
   dataKey: string;
   label: string;
+  title: string;
 }) {
   const chartConfig = {
     [dataKey]: {
@@ -39,7 +41,7 @@ export default function VitalChart({
   });
   return (
     <div className="flex flex-col">
-      <div className="mb-4 font-semibold">{label}</div>
+      <div className="mb-4 font-semibold">{title}</div>
       <ChartContainer
         config={chartConfig}
         className="aspect-auto h-[250px] w-full"
