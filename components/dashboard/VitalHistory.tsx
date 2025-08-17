@@ -156,19 +156,22 @@ export function VitalHistory() {
           timeRange={timeRange}
           chartData={chartData}
           dataKey="cholestrol"
-          label="Cholestrol(mg/dL)"
+          label="(mg/dL)"
+          title="Cholestrol(mg/dL)"
         />
         <VitalChart
           timeRange={timeRange}
           chartData={chartData}
           dataKey="glucose_fasting"
-          label="Glucose while fasting(mmol/L)"
+          label="(mmol/L)"
+          title="Glucose while fasting(mmol/L)"
         />
         <VitalChart
           timeRange={timeRange}
           chartData={chartData}
           dataKey="glucose_after"
-          label="Glucose after food(mmol/L)"
+          label="(mmol/L)"
+          title="Glucose after food(mmol/L)"
         />
       </CardContent>
     </Card>
