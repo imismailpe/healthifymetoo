@@ -40,7 +40,7 @@ export default function UpdateCompliance({
   const userQuery = useUserQuery(userId);
 
   const [data, setData] = useState(userQuery.data);
-
+  const chartDataReady = userQuery.isFetched && userQuery?.data?.data?.length;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: data,
@@ -56,7 +56,7 @@ export default function UpdateCompliance({
     onOpenChange(false);
   }
   useEffect(() => {
-    if (userQuery.isFetched) {
+    if (chartDataReady) {
       const data = userQuery.data.data[0];
 
       const values = {
@@ -70,7 +70,7 @@ export default function UpdateCompliance({
       });
       setData(values);
     }
-  }, [userQuery.isFetched]);
+  }, [chartDataReady]);
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>

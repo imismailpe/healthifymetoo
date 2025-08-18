@@ -35,17 +35,17 @@ export default function KeyProgress() {
   const { data: session } = useSessionQuery();
   const userId = session?.user?.id || "";
   const userQuery = useUserQuery(userId);
-  const chartDataReady = userQuery.isFetched && !userQuery.isFetching;
+  const chartDataReady = userQuery.isFetched && userQuery?.data?.data?.length;
 
   useEffect(() => {
     if (chartDataReady) {
       const data = userQuery.data.data[0];
 
       const values = {
-        wakeup_gap: data.wakeup_gap,
-        workout: data.workout,
-        last_meal_gap: data.last_meal_gap,
-        sleep: data.sleep,
+        wakeup_gap: data?.wakeup_gap,
+        workout: data?.workout,
+        last_meal_gap: data?.last_meal_gap,
+        sleep: data?.sleep,
       };
       setData(values);
       if (!data.dob) {
