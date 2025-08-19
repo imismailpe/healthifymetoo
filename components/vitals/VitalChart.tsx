@@ -12,13 +12,15 @@ export default function VitalChart({
   timeRange,
   dataKey,
   label,
-  title
+  title,
+  index,
 }: {
   chartData: Record<string, unknown>[];
   timeRange: string;
   dataKey: string;
   label: string;
   title: string;
+  index: number;
 }) {
   const chartConfig = {
     [dataKey]: {
@@ -51,12 +53,12 @@ export default function VitalChart({
             <linearGradient id={`fill${dataKey}`} x1="0" y1="0" x2="0" y2="1">
               <stop
                 offset="5%"
-                stopColor="var(--color-chart-2)"
+                stopColor={`var(--color-chart-${index})`}
                 stopOpacity={1.0}
               />
               <stop
                 offset="95%"
-                stopColor="var(--color-chart-2)"
+                stopColor={`var(--color-chart-${index})`}
                 stopOpacity={0.1}
               />
             </linearGradient>
@@ -94,7 +96,7 @@ export default function VitalChart({
             dataKey={dataKey}
             type="natural"
             fill={`url(#fill${dataKey})`}
-            stroke="var(--color-chart-2)"
+            stroke={`var(--color-chart-${index})`}
             stackId="a"
           />
         </AreaChart>

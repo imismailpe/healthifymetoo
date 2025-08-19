@@ -178,6 +178,20 @@ export default function HealthEdit() {
                           <Checkbox
                             checked={field.value?.includes(item.id)}
                             onCheckedChange={(checked) => {
+                              if (checked && item.id === "hyperthyrodism") {
+                                const values = field.value.filter(
+                                  (val) => val !== "hypothyroidism"
+                                );
+                                return field.onChange([...values, item.id]);
+                              } else if (
+                                checked &&
+                                item.id === "hypothyroidism"
+                              ) {
+                                const values = field.value.filter(
+                                  (val) => val !== "hyperthyrodism"
+                                );
+                                return field.onChange([...values, item.id]);
+                              }
                               return checked
                                 ? field.onChange([...field.value, item.id])
                                 : field.onChange(

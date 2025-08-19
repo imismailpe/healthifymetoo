@@ -47,21 +47,25 @@ export function VitalHistory() {
       dataKey: "glucose_fasting",
       label: "(mmol/L)",
       title: "Glucose while fasting(mmol/L)",
+      color: "chart-2",
     },
     {
       dataKey: "glucose_after",
       label: "(mmol/L)",
       title: "Glucose after food(mmol/L)",
+      color: "chart-3",
     },
     {
       dataKey: "cholestrol",
       label: "(mg/dL)",
       title: "Cholestrol(mg/dL)",
+      color: "chart-4",
     },
     {
       dataKey: "weight",
       label: "(kg)",
       title: "Body weight(kg)",
+      color: "chart-5",
     },
   ];
   useEffect(() => {
@@ -188,7 +192,7 @@ export function VitalHistory() {
           </CardAction>
         </CardHeader>
         <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
-          {VitalsChartList.map((vital) => (
+          {VitalsChartList.map((vital, index) => (
             <React.Fragment key={vital.dataKey}>
               {vitalsQuery.isFetched ? (
                 <VitalChart
@@ -197,6 +201,7 @@ export function VitalHistory() {
                   dataKey={vital.dataKey}
                   label={vital.label}
                   title={vital.title}
+                  index={index + 1}
                 />
               ) : (
                 <div className="flex gap-4 flex-col">
