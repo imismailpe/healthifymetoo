@@ -14,7 +14,7 @@ export function LogDrawer({
   onOpenChange: (open: boolean) => void;
 }) {
   const [readingIndex, setReadingIndex] = useState(0);
-  const defaultValues = [15, 110, 220, 50];
+  const defaultValues = [110, 220, 15, 50];
   const [values, setValues] = useState(defaultValues);
   const queryClient = useQueryClient();
   const { data: session } = useSessionQuery();
@@ -44,9 +44,9 @@ export function LogDrawer({
     const formatted = today.toISOString().split("T")[0];
     const params = {
       userId,
-      cholestrol: values[0],
-      glucose_fasting: values[1],
-      glucose_after: values[2],
+      glucose_fasting: values[0],
+      glucose_after: values[1],
+      cholestrol: values[2],
       weight: values[3],
       date: formatted,
       createdAt: today,
@@ -61,15 +61,6 @@ export function LogDrawer({
     onOpenChange(false);
   };
   const config = [
-    {
-      title: "Cholestrol",
-      desc: "Cholestrol level",
-      min: 8,
-      max: 22,
-      unit: "mg/dL",
-      optimal: 12,
-      step: 1,
-    },
     {
       title: "Glucose - Fasting",
       desc: "Blood glucose level",
@@ -87,6 +78,15 @@ export function LogDrawer({
       unit: "mmol/L",
       optimal: 250,
       step: 10,
+    },
+    {
+      title: "Cholestrol",
+      desc: "Cholestrol level",
+      min: 8,
+      max: 22,
+      unit: "mg/dL",
+      optimal: 12,
+      step: 1,
     },
     {
       title: "Weight",
