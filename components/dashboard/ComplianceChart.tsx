@@ -102,7 +102,7 @@ export default function ComplianceChart({
           </PolarRadiusAxis>
         </RadialBarChart>
       </ChartContainer>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <div className="text-md font-semibold">
           {userPerc <= 50
             ? `${label} is poor`

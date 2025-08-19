@@ -123,10 +123,7 @@ export function VitalHistory() {
         <CardHeader>
           <CardTitle>Blood pressure and Heaart rate</CardTitle>
           <CardDescription>
-            <span className="hidden @[540px]/card:block">
-              Vital readings for past days. Multiple readings per day.
-            </span>
-            <span className="@[540px]/card:hidden">Last 30 days</span>
+            Vital readings for past days. Multiple readings per day.
           </CardDescription>
           <CardAction>
             <Button
@@ -178,10 +175,7 @@ export function VitalHistory() {
         <CardHeader>
           <CardTitle>Others</CardTitle>
           <CardDescription>
-            <span className="hidden @[540px]/card:block">
-              Vital readings for past days. One reading per day.
-            </span>
-            <span className="@[540px]/card:hidden">Last 30 days</span>
+            Vital readings for past days. One reading per day.
           </CardDescription>
           <CardAction>
             <Button

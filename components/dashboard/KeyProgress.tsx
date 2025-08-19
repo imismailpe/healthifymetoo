@@ -61,10 +61,7 @@ export default function KeyProgress() {
           <CardTitle>Your Compliance with optimal measures</CardTitle>
           <CardDescription>Try to improve your points</CardDescription>
           <CardAction>
-            <Button
-              variant={"outline"}
-              onClick={() => setUpdateComplianceOpen(true)}
-            >
+            <Button onClick={() => setUpdateComplianceOpen(true)}>
               <ClockPlus />
             </Button>
           </CardAction>
