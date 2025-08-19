@@ -26,7 +26,7 @@ import { useVitalsTSQuery } from "@/hooks/useVitalsTimeSeries";
 import { Button } from "../ui/button";
 import { LogDrawer } from "./LogDrawer";
 import { TimelyLogDrawer } from "./TimelyLogDrawer";
-import { HeartPlus, UserPlus } from "lucide-react";
+import { Activity, Droplets } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 export function VitalHistory() {
@@ -124,7 +124,7 @@ export function VitalHistory() {
           <CardTitle>Blood pressure and Heaart rate</CardTitle>
           <CardDescription>
             <span className="hidden @[540px]/card:block">
-              Vital readings for past days
+              Vital readings for past days. Multiple readings per day.
             </span>
             <span className="@[540px]/card:hidden">Last 30 days</span>
           </CardDescription>
@@ -134,7 +134,7 @@ export function VitalHistory() {
               onClick={() => setTSLogOpen(!logOpen)}
               className="font-semibold rounded-full"
             >
-              <HeartPlus />
+              <Activity />
             </Button>
           </CardAction>
         </CardHeader>
@@ -179,7 +179,7 @@ export function VitalHistory() {
           <CardTitle>Others</CardTitle>
           <CardDescription>
             <span className="hidden @[540px]/card:block">
-              Vital readings for past days
+              Vital readings for past days. One reading per day.
             </span>
             <span className="@[540px]/card:hidden">Last 30 days</span>
           </CardDescription>
@@ -189,7 +189,7 @@ export function VitalHistory() {
               onClick={() => setLogOpen(!logOpen)}
               className="font-semibold rounded-full"
             >
-              <UserPlus />
+              <Droplets />
             </Button>
           </CardAction>
         </CardHeader>
