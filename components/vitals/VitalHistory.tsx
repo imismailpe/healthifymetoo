@@ -23,6 +23,8 @@ import BPChart from "./BPChart";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { Skeleton } from "../ui/skeleton";
 import { useVitalsQuery } from "@/hooks/useVitalsQuery";
+import PulseChart from "./PulseChart";
+import { useVitalsTSQuery } from "@/hooks/useVitalsTimeSeries";
 
 export function VitalHistory() {
   const isMobile = useIsMobile();
@@ -32,7 +34,9 @@ export function VitalHistory() {
   const userId = session?.user?.id || "";
 
   const vitalsQuery = useVitalsQuery(userId);
+  const vitalsTSQuery = useVitalsTSQuery(userId);
   const chartData = vitalsQuery?.data?.data || [];
+  const chartTSData = vitalsTSQuery?.data?.data || [];
   const VitalsChartList = [
     {
       dataKey: "cholestrol",
@@ -53,11 +57,6 @@ export function VitalHistory() {
       dataKey: "weight",
       label: "(kg)",
       title: "Body weight(kg)",
-    },
-    {
-      dataKey: "heart_rate",
-      label: "(bpm)",
-      title: "Heart pulse rate(pbm)",
     },
   ];
   React.useEffect(() => {
@@ -116,22 +115,38 @@ export function VitalHistory() {
         </CardAction>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {vitalsQuery.isFetched ? (
-          <BPChart
-            timeRange={timeRange}
-            chartData={chartData}
-            dataKey1="bp_systolic"
-            dataKey2="bp_diastolic"
-            label1="Systolic"
-            label2="Diastolic"
-            title="Blood Pressure(mmHG)"
-          />
+        {vitalsTSQuery.isFetched ? (
+          <>
+            <BPChart
+              timeRange={timeRange}
+              chartData={chartTSData}
+              dataKey1="bp_systolic"
+              dataKey2="bp_diastolic"
+              label1="Systolic"
+              label2="Diastolic"
+              title="Blood Pressure(mmHG)"
+            />
+            <PulseChart
+              timeRange={timeRange}
+              chartData={chartTSData}
+              dataKey="heart_rate"
+              label="Heart Rate"
+              title="Pulse(bpm)"
+            />
+          </>
         ) : (
-          <div className="flex gap-4 flex-col">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-          </div>
+          <>
+            <div className="flex gap-4 flex-col">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+            </div>
+            <div className="flex gap-4 flex-col">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+            </div>
+          </>
         )}
         {VitalsChartList.map((vital) => (
           <React.Fragment key={vital.dataKey}>

@@ -7,30 +7,22 @@ import {
 } from "../ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-export default function BPChart({
+export default function PulseChart({
   chartData,
   timeRange,
-  dataKey1,
-  dataKey2,
-  label1,
-  label2,
+  dataKey,
+  label,
   title,
 }: {
   chartData: Record<string, unknown>[];
   timeRange: string;
-  dataKey1: string;
-  dataKey2: string;
-  label1: string;
-  label2: string;
+  dataKey: string;
+  label: string;
   title: string;
 }) {
   const chartConfig = {
-    [dataKey1]: {
-      label: label1,
-      color: "var(--chart-2)",
-    },
-    [dataKey2]: {
-      label: label2,
+    [dataKey]: {
+      label: label,
       color: "var(--chart-2)",
     },
   } satisfies ChartConfig;
@@ -96,18 +88,11 @@ export default function BPChart({
             }
           />
           <Area
-            dataKey={dataKey1}
+            dataKey={dataKey}
             type="linear"
-            fill={`url(#fill${dataKey1})`}
+            fill={`url(#fill${dataKey})`}
             stroke="var(--color-chart-2)"
             stackId="a"
-          />
-          <Area
-            dataKey={dataKey2}
-            type="linear"
-            fill={`url(#fill${dataKey2})`}
-            stroke="var(--color-chart-1)"
-            stackId="b"
           />
         </AreaChart>
       </ChartContainer>

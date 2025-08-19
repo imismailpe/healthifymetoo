@@ -6,7 +6,7 @@ import Reader from "./Reader";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { useQueryClient } from "@tanstack/react-query";
 
-export function LogDrawer({
+export function TimelyLogDrawer({
   open,
   onOpenChange,
 }: {
@@ -14,7 +14,7 @@ export function LogDrawer({
   onOpenChange: (open: boolean) => void;
 }) {
   const [readingIndex, setReadingIndex] = useState(0);
-  const defaultValues = [15, 110, 220, 50];
+  const defaultValues = [120, 80, 72];
   const [values, setValues] = useState(defaultValues);
   const queryClient = useQueryClient();
   const { data: session } = useSessionQuery();
@@ -22,7 +22,7 @@ export function LogDrawer({
   const [isPending, setIsPending] = useState(false);
 
   const onNextStep = () => {
-    if (readingIndex + 1 < 4) {
+    if (readingIndex + 1 < 3) {
       setReadingIndex(readingIndex + 1);
     } else {
       onSubmit();
@@ -40,61 +40,47 @@ export function LogDrawer({
   };
   const onSubmit = async () => {
     setIsPending(true);
-    const today = new Date();
-    const formatted = today.toISOString().split("T")[0];
     const params = {
       userId,
-      cholestrol: values[0],
-      glucose_fasting: values[1],
-      glucose_after: values[2],
-      weight: values[3],
-      date: formatted,
-      createdAt: today,
+      bp_systolic: values[0],
+      bp_diastolic: values[1],
+      heart_rate: values[2],
     };
-    const response = await fetch(`/api/vitals?userId=${userId}`, {
+    const response = await fetch("/api/vitals_timeseries", {
       method: "POST",
       body: JSON.stringify(params),
     });
-    queryClient.invalidateQueries({ queryKey: ["vitals"] });
+    queryClient.invalidateQueries({ queryKey: ["vitals_timeseries"] });
     setIsPending(false);
     setReadingIndex(0);
     onOpenChange(false);
   };
   const config = [
     {
-      title: "Cholestrol",
-      desc: "Cholestrol level",
-      min: 8,
-      max: 22,
-      unit: "mg/dL",
-      optimal: 12,
-      step: 1,
-    },
-    {
-      title: "Glucose - Fasting",
-      desc: "Blood glucose level",
+      title: "Systolic pressure",
+      desc: "Blood pressure",
       min: 80,
       max: 220,
-      unit: "mmol/L",
-      optimal: 110,
+      unit: "mmHG",
+      optimal: 120,
       step: 10,
     },
     {
-      title: "Glucose - After food",
-      desc: "Blood glucose level",
-      min: 80,
-      max: 350,
-      unit: "mmol/L",
-      optimal: 250,
+      title: "Diatolic pressure",
+      desc: "Blood pressure",
+      min: 50,
+      max: 120,
+      unit: "mmHG",
+      optimal: 80,
       step: 10,
     },
     {
-      title: "Weight",
-      desc: "Body weight",
-      min: 30,
-      max: 500,
-      unit: "kg",
-      optimal: 50,
+      title: "Heart Rate",
+      desc: "Heart pulse rate",
+      min: 50,
+      max: 90,
+      unit: "bpm",
+      optimal: 72,
       step: 1,
     },
   ];

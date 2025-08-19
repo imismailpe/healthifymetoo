@@ -42,6 +42,23 @@ export async function updateDocument(
     return { success: false, message: error };
   }
 }
+export async function insertDocument(
+  collection: string,
+  data: Record<string, unknown>
+) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("HB");
+    const result = await db.collection(collection).insertOne(data);
+    return {
+      success: result.acknowledged,
+      data: result.insertedId,
+    };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: error };
+  }
+}
 export async function upsertDocumentByUserId(
   collection: string,
   userId: string,
