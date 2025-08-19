@@ -47,25 +47,25 @@ export function VitalHistory() {
       dataKey: "glucose_fasting",
       label: "(mmol/L)",
       title: "Glucose while fasting(mmol/L)",
-      color: "chart-2",
+      color: "1",
     },
     {
       dataKey: "glucose_after",
       label: "(mmol/L)",
       title: "Glucose after food(mmol/L)",
-      color: "chart-3",
+      color: "2",
     },
     {
       dataKey: "cholestrol",
       label: "(mg/dL)",
       title: "Cholestrol(mg/dL)",
-      color: "chart-4",
+      color: "3",
     },
     {
       dataKey: "weight",
       label: "(kg)",
       title: "Body weight(kg)",
-      color: "chart-5",
+      color: "4",
     },
   ];
   useEffect(() => {
@@ -201,7 +201,7 @@ export function VitalHistory() {
                   dataKey={vital.dataKey}
                   label={vital.label}
                   title={vital.title}
-                  index={index + 1}
+                  color={vital.color}
                 />
               ) : (
                 <div className="flex gap-4 flex-col">
