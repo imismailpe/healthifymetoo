@@ -20,7 +20,6 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import VitalChart from "./VitalChart";
 import BPChart from "./BPChart";
-import { useQuery } from "@tanstack/react-query";
 import { useSessionQuery } from "@/hooks/useSessionQuery";
 import { Skeleton } from "../ui/skeleton";
 import { useVitalsQuery } from "@/hooks/useVitalsQuery";
@@ -34,6 +33,33 @@ export function VitalHistory() {
 
   const vitalsQuery = useVitalsQuery(userId);
   const chartData = vitalsQuery?.data?.data || [];
+  const VitalsChartList = [
+    {
+      dataKey: "cholestrol",
+      label: "(mg/dL)",
+      title: "Cholestrol(mg/dL)",
+    },
+    {
+      dataKey: "glucose_fasting",
+      label: "(mmol/L)",
+      title: "Glucose while fasting(mmol/L)",
+    },
+    {
+      dataKey: "glucose_after",
+      label: "(mmol/L)",
+      title: "Glucose after food(mmol/L)",
+    },
+    {
+      dataKey: "weight",
+      label: "(kg)",
+      title: "Body weight(kg)",
+    },
+    {
+      dataKey: "heart_rate",
+      label: "(bpm)",
+      title: "Heart pulse rate(pbm)",
+    },
+  ];
   React.useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");
@@ -107,66 +133,25 @@ export function VitalHistory() {
             <Skeleton className="h-12 w-full" />
           </div>
         )}
-        {vitalsQuery.isFetched ? (
-          <VitalChart
-            timeRange={timeRange}
-            chartData={chartData}
-            dataKey="cholestrol"
-            label="(mg/dL)"
-            title="Cholestrol(mg/dL)"
-          />
-        ) : (
-          <div className="flex gap-4 flex-col">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-          </div>
-        )}
-        {vitalsQuery.isFetched ? (
-          <VitalChart
-            timeRange={timeRange}
-            chartData={chartData}
-            dataKey="glucose_fasting"
-            label="(mmol/L)"
-            title="Glucose while fasting(mmol/L)"
-          />
-        ) : (
-          <div className="flex gap-4 flex-col">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-          </div>
-        )}
-        {vitalsQuery.isFetched ? (
-          <VitalChart
-            timeRange={timeRange}
-            chartData={chartData}
-            dataKey="glucose_after"
-            label="(mmol/L)"
-            title="Glucose after food(mmol/L)"
-          />
-        ) : (
-          <div className="flex gap-4 flex-col">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-          </div>
-        )}
-        {vitalsQuery.isFetched ? (
-          <VitalChart
-            timeRange={timeRange}
-            chartData={chartData}
-            dataKey="weight"
-            label="kg"
-            title="Weight(kg)"
-          />
-        ) : (
-          <div className="flex gap-4 flex-col">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-          </div>
-        )}
+        {VitalsChartList.map((vital) => (
+          <React.Fragment key={vital.dataKey}>
+            {vitalsQuery.isFetched ? (
+              <VitalChart
+                timeRange={timeRange}
+                chartData={chartData}
+                dataKey={vital.dataKey}
+                label={vital.label}
+                title={vital.title}
+              />
+            ) : (
+              <div className="flex gap-4 flex-col">
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            )}
+          </React.Fragment>
+        ))}
       </CardContent>
     </Card>
   );

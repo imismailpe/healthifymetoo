@@ -14,7 +14,7 @@ export function LogDrawer({
   onOpenChange: (open: boolean) => void;
 }) {
   const [readingIndex, setReadingIndex] = useState(0);
-  const defaultValues = [120, 80, 15, 110, 220, 50];
+  const defaultValues = [120, 80, 15, 110, 220, 50, 72];
   const [values, setValues] = useState(defaultValues);
   const queryClient = useQueryClient();
   const { data: session } = useSessionQuery();
@@ -22,7 +22,7 @@ export function LogDrawer({
   const [isPending, setIsPending] = useState(false);
 
   const onNextStep = () => {
-    if (readingIndex + 1 < 6) {
+    if (readingIndex + 1 < 7) {
       setReadingIndex(readingIndex + 1);
     } else {
       onSubmit();
@@ -50,6 +50,7 @@ export function LogDrawer({
       glucose_fasting: values[3],
       glucose_after: values[4],
       weight: values[5],
+      heart_rate: values[6],
       date: formatted,
       createdAt: today,
     };
@@ -62,72 +63,77 @@ export function LogDrawer({
     setReadingIndex(0);
     onOpenChange(false);
   };
-  const config =
-    readingIndex === 0
-      ? {
-          title: "Systolic pressure",
-          desc: "Blood pressure",
-          min: 80,
-          max: 220,
-          unit: "mmHG",
-          optimal: 120,
-          step: 10,
-        }
-      : readingIndex === 1
-      ? {
-          title: "Diatolic pressure",
-          desc: "Blood pressure",
-          min: 50,
-          max: 120,
-          unit: "mmHG",
-          optimal: 80,
-          step: 10,
-        }
-      : readingIndex === 2
-      ? {
-          title: "Cholestrol",
-          desc: "Cholestrol level",
-          min: 8,
-          max: 22,
-          unit: "mg/dL",
-          optimal: 12,
-          step: 1,
-        }
-      : readingIndex === 3
-      ? {
-          title: "Glucose - Fasting",
-          desc: "Blood glucose level",
-          min: 80,
-          max: 220,
-          unit: "mmol/L",
-          optimal: 110,
-          step: 10,
-        }
-      : readingIndex === 4
-      ? {
-          title: "Glucose - After food",
-          desc: "Blood glucose level",
-          min: 80,
-          max: 350,
-          unit: "mmol/L",
-          optimal: 250,
-          step: 10,
-        }
-      : {
-          title: "Weight",
-          desc: "Body weight",
-          min: 30,
-          max: 500,
-          unit: "kg",
-          optimal: 50,
-          step: 1,
-        };
+  const config = [
+    {
+      title: "Systolic pressure",
+      desc: "Blood pressure",
+      min: 80,
+      max: 220,
+      unit: "mmHG",
+      optimal: 120,
+      step: 10,
+    },
+    {
+      title: "Diatolic pressure",
+      desc: "Blood pressure",
+      min: 50,
+      max: 120,
+      unit: "mmHG",
+      optimal: 80,
+      step: 10,
+    },
+    {
+      title: "Cholestrol",
+      desc: "Cholestrol level",
+      min: 8,
+      max: 22,
+      unit: "mg/dL",
+      optimal: 12,
+      step: 1,
+    },
+    {
+      title: "Glucose - Fasting",
+      desc: "Blood glucose level",
+      min: 80,
+      max: 220,
+      unit: "mmol/L",
+      optimal: 110,
+      step: 10,
+    },
+    {
+      title: "Glucose - After food",
+      desc: "Blood glucose level",
+      min: 80,
+      max: 350,
+      unit: "mmol/L",
+      optimal: 250,
+      step: 10,
+    },
+    {
+      title: "Weight",
+      desc: "Body weight",
+      min: 30,
+      max: 500,
+      unit: "kg",
+      optimal: 50,
+      step: 1,
+    },
+    {
+      title: "Heart Rate",
+      desc: "Heart pulse rate",
+      min: 50,
+      max: 90,
+      unit: "bpm",
+      optimal: 72,
+      step: 1,
+    },
+  ];
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
         <Reader
           readingIndex={readingIndex}
-          {...config}
+          {...config[readingIndex]}
           onNextStep={onNextStep}
           onPrevStep={onPrevStep}
           reading={values[readingIndex]}
