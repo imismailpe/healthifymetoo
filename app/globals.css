@@ -130,3 +130,6 @@ h2::first-letter{
   font-weight: 800;
   font-size: xx-large;
 }
+@view-transition {
+ navigation: auto;
+}

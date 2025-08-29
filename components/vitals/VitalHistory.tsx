@@ -28,11 +28,14 @@ import { LogDrawer } from "./LogDrawer";
 import { TimelyLogDrawer } from "./TimelyLogDrawer";
 import { Activity, Droplets } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function VitalHistory() {
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = useState("30d");
   const [logOpen, setLogOpen] = useState(false);
+  const [logView, setLogView] = useState("DESC");
+  //timeseries logs
   const [tsLogOpen, setTSLogOpen] = useState(false);
 
   const { data: session } = useSessionQuery();
@@ -42,7 +45,7 @@ export function VitalHistory() {
   const vitalsTSQuery = useVitalsTSQuery(userId);
   const chartData = vitalsQuery?.data?.data || [];
   const chartTSData = vitalsTSQuery?.data?.data || [];
-  const VitalsChartList = [
+  const vitalsChartList = [
     {
       dataKey: "glucose_fasting",
       label: "(mmol/L)",
@@ -59,13 +62,13 @@ export function VitalHistory() {
       dataKey: "cholestrol",
       label: "(mg/dL)",
       title: "Cholestrol(mg/dL)",
-      color: "3",
+      color: "1",
     },
     {
       dataKey: "weight",
       label: "(kg)",
       title: "Body weight(kg)",
-      color: "4",
+      color: "2",
     },
   ];
   useEffect(() => {
@@ -73,7 +76,7 @@ export function VitalHistory() {
       setTimeRange("7d");
     }
   }, [isMobile]);
-
+  console.log("chartData", chartData);
   return (
     <>
       <Card className="@container/card mb-4">
@@ -191,27 +194,83 @@ export function VitalHistory() {
             </Button>
           </CardAction>
         </CardHeader>
-        <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
-          {VitalsChartList.map((vital, index) => (
-            <React.Fragment key={vital.dataKey}>
-              {vitalsQuery.isFetched ? (
-                <VitalChart
-                  timeRange={timeRange}
-                  chartData={chartData}
-                  dataKey={vital.dataKey}
-                  label={vital.label}
-                  title={vital.title}
-                  color={vital.color}
-                />
-              ) : (
-                <div className="flex gap-4 flex-col">
-                  <Skeleton className="h-12 w-full" />
-                  <Skeleton className="h-12 w-full" />
-                  <Skeleton className="h-12 w-full" />
-                </div>
-              )}
-            </React.Fragment>
-          ))}
+        <CardContent
+        // className="px-2 pt-4 sm:px-6 sm:pt-6 grid grid-cols-1 xl:grid-cols-2 gap-4"
+        >
+          {vitalsQuery.isFetched ? (
+            <Tabs defaultValue="DESC">
+              <TabsList className="mb-2">
+                <TabsTrigger value="DESC">Last reading</TabsTrigger>
+                <TabsTrigger value="CHARTS">History Charts</TabsTrigger>
+              </TabsList>
+              <TabsContent value="DESC">
+                {chartData.length > 0 ? (
+                  <>
+                    <div className="text-md mb-2 font-medium">
+                      {new Date(chartData.at(-1).createdAt)?.toLocaleString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          second: "numeric",
+                          hour12: true,
+                        }
+                      )}
+                    </div>
+                    <div className="grid grid-cols-[auto_auto] gap-2">
+                      <div className="title">Glucose(fasting)</div>
+                      <div className="font-medium">
+                        {`${chartData[0].glucose_fasting} ${vitalsChartList[0].label}`}
+                      </div>
+
+                      <div className="title">Glucose(After food)</div>
+                      <div className="font-medium">
+                        {`${chartData[0].glucose_after} ${vitalsChartList[1].label}`}
+                      </div>
+
+                      <div className="title">Cholestrol</div>
+                      <div className="font-medium">
+                        {`${chartData[0].cholestrol} ${vitalsChartList[2].label}`}
+                      </div>
+
+                      <div className="title">Body weight</div>
+                      <div className="font-medium">
+                        {`${chartData[0].weight} ${vitalsChartList[3].label}`}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="font-medium m-4">No readings yet</div>
+                )}
+              </TabsContent>
+              <TabsContent
+                value="CHARTS"
+                className="grid grid-cols-1 xl:grid-cols-2"
+              >
+                {vitalsChartList.map((vital) => (
+                  <React.Fragment key={vital.dataKey}>
+                    <VitalChart
+                      timeRange={timeRange}
+                      chartData={chartData}
+                      dataKey={vital.dataKey}
+                      label={vital.label}
+                      title={vital.title}
+                      color={vital.color}
+                    />
+                  </React.Fragment>
+                ))}
+              </TabsContent>
+            </Tabs>
+          ) : (
+            <div className="flex gap-4 flex-col">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+            </div>
+          )}
         </CardContent>
       </Card>
       <LogDrawer open={logOpen} onOpenChange={setLogOpen} />
