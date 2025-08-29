@@ -128,7 +128,7 @@ export function VitalHistory() {
       </Card>
       <Card className="@container/card mb-4">
         <CardHeader>
-          <CardTitle>Blood pressure and Heaart rate</CardTitle>
+          <CardTitle>Blood pressure and Heart rate</CardTitle>
           <CardDescription>
             Vital readings for past days. Multiple readings per day.
           </CardDescription>
