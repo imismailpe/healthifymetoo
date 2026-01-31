@@ -12,7 +12,7 @@ export default function Home() {
       <main className="text-lg">
         <div className="flex gap-4 flex-col">
           <div className="bg-[url('/images/bg2.jfif')] bg-cover bg-no-repeat bg-center w-full p-2 md:p-8 flex wrap rounded border-sm shadow-sm">
-            <div className="text-black backdrop-blur-sm p-8 rounded bg-black/60 text-white">
+            <div className="backdrop-blur-sm- p-8 rounded bg-black/60- text-white glass-card">
               <h2 className="font-bold text-xl">
                 Welcome to your path to natural wellness and a life Beyond
                 Medication
